@@ -3,17 +3,6 @@ description: "Found a test issue report it here"
 title: "test: <title>"
 labels: ["tests"]
 body:
-  - type: dropdown
-    id: feat_type
-    attributes:
-      label: Project
-      description: In which project should we write new tests or check on failing tests?
-      options:
-        - "Client"
-        - "Server"
-        - "Core"
-    validations:
-      required: true
   - type: textarea
     id: description
     attributes:
