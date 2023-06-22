@@ -1,0 +1,16 @@
+{
+	"projectName": "maya",
+	"projectOwner": "aayushchugh",
+	"repoType": "github",
+	"repoHost": "https://github.com",
+	"files": [
+		"README.md"
+	],
+	"imageSize": 70,
+	"commit": true,
+	"commitConvention": "eslint",
+	"contributorsPerLine": 7,
+	"linkToUsage": true,
+	"commitType": "docs",
+	"contributors": []
+}
