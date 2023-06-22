@@ -86,9 +86,11 @@ docker-compose up
 > :warning: If you are using docker to run client than you need to manually put the `IP` address of your machine in the `expo` to run the app on your phone.
 > example if `IP` address of your machine is `192.172.36.18` than you expo url will be `exp://192.172.36.18:19000` and you will need to put this address in your emulator or phone in expo app.
 
-## UI Design
+### UI Design
 
 [Figma URL](https://www.figma.com/file/ojtvKg3GqfcWxfQh8CPBFO/Maya?type=design&t=YiQRFjTrCGUL18Ic-1)
+
+### [Postman collection](https://tinyurl.com/5ay7mh8s)
 
 ## Technologies
 
