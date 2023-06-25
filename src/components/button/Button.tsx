@@ -37,7 +37,7 @@ const ButtonPrimary: FC<ButtonPrimaryProps> = ({ title, to, rootClassName, textC
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 	return (
 		<TouchableOpacity
-			className={`py-3 px-16 bg-primary rounded-xl mt-20 ${rootClassName}`}
+			className={`py-3 px-16 bg-primary rounded-xl ${rootClassName}`}
 			onPress={() => navigation.navigate(to)}
 		>
 			<Text className={`text-white text-lg ${textClassName}`}>{title}</Text>
