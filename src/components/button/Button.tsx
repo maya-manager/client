@@ -3,7 +3,7 @@ import { FC } from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { RootStackParamList } from "../../App";
 
-interface ButtonPrimaryProps {
+interface IButtonPrimaryProps {
 	/**
 	 * The screen to navigate to
 	 */
@@ -30,10 +30,10 @@ interface ButtonPrimaryProps {
  *
  * @example
  * ```tsx
- * <ButtonPrimary to="Signup" title="Get Started" />
+ * <ButtonPrimary to="Signup" title="Get Started" rootClassName="mt-8" textClassName="font-bold" />
  * ```
  */
-const ButtonPrimary: FC<ButtonPrimaryProps> = ({ title, to, rootClassName, textClassName }) => {
+const ButtonPrimary: FC<IButtonPrimaryProps> = ({ title, to, rootClassName, textClassName }) => {
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 	return (
 		<TouchableOpacity

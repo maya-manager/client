@@ -1,9 +1,11 @@
 import React from "react";
 import { NavigationContainer, Theme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen, LoginScreen, SignupScreen } from "./screens";
 import { SafeAreaView } from "react-native";
 import constants from "./common/constants";
+import HomeScreen from "./screens/homeScreen/HomeScreen";
+import SignupScreen from "./screens/signupScreen/SignupScreen";
+import LoginScreen from "./screens/loginScreen/LoginScreen";
 
 export type RootStackParamList = {
 	Home: undefined;

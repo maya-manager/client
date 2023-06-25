@@ -1,45 +1,54 @@
 import React, { FC, ReactNode } from "react";
 import { Text } from "react-native";
 
-interface HeadingPrimaryProps {
+interface IHeadingPrimaryProps {
 	/**
 	 * The title of the heading
 	 */
 	title: string | ReactNode;
 
 	/**
-	 * Additional class names for the heading
+	 * Additional class names
 	 */
-	className?: string;
+	rootClassName?: string;
 }
 
 /**
  * The primary heading component
+ *
  * @example
  * ```tsx
- * <HeadingPrimary title="Signup" className="mt-5" />
+ * <HeadingPrimary title="Signup" rootClassName="mt-5" />
  * ```
  */
-export const HeadingPrimary: FC<HeadingPrimaryProps> = ({ title, className }) => {
+export const HeadingPrimary: FC<IHeadingPrimaryProps> = ({ title, rootClassName }) => {
 	return (
-		<Text className={`text-lightgrey text-center font-semibold text-2xl ${className}`}>
+		<Text className={`text-lightgrey text-center font-semibold text-2xl ${rootClassName}`}>
 			{title}
 		</Text>
 	);
 };
 
-interface ParaPrimaryProps {
+interface IParaPrimaryProps {
 	/**
 	 * The title of the paragraph
 	 */
 	title: string | ReactNode;
 
 	/**
-	 * Additional class names for the paragraph
+	 * Additional class names
 	 */
-	className?: string;
+	rootClassName?: string;
 }
 
-export const ParaPrimary: FC<ParaPrimaryProps> = ({ title, className }) => {
-	return <Text className={`text-lg tracking-widest font-light ${className}`}>{title}</Text>;
+/**
+ * The primary paragraph component
+ *
+ * @example
+ * ```tsx
+ * <ParaPrimary title="Join us now and let us take care of all your stress to manage your money" rootClassName="mt-8" />
+ * ```
+ */
+export const ParaPrimary: FC<IParaPrimaryProps> = ({ title, rootClassName }) => {
+	return <Text className={`text-lg tracking-widest font-light ${rootClassName}`}>{title}</Text>;
 };

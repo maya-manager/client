@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { View, ScrollView, Image } from "react-native";
-import Header from "../components/header/Header";
-import { HeadingPrimary } from "../components/typography/Typography";
+import Header from "../../components/header/Header";
+import { HeadingPrimary } from "../../components/typography/Typography";
 
 const SignupScreen: FC = () => {
 	return (
@@ -11,7 +11,7 @@ const SignupScreen: FC = () => {
 			<View className="items-center">
 				<View className="w-auto h-auto mt-10">
 					<Image
-						source={require("../../assets/illustrations/signup.jpg")}
+						source={require("../../../assets/illustrations/signup.jpg")}
 						className="w-[80vw] h-[80vw]"
 					/>
 				</View>
