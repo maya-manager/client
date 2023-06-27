@@ -2,7 +2,8 @@ const constants = {
 	colors: {
 		primary: "#56BAA7",
 		white: "#fff",
-		lightGrey: "#565656",
+		grey: "#565656",
+		placeholders: "#868686",
 	},
 };
 
