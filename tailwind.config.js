@@ -4,8 +4,9 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				lightgrey: "#565656",
+				grey: "#565656",
 				primary: "#56BAA7",
+				greyLight: "#868686",
 			},
 			fontFamily: {
 				motserrat: ["Montserrat", "sans"],

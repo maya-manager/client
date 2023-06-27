@@ -8,7 +8,7 @@ interface IButtonPrimaryProps {
 	 * The screen to navigate to
 	 */
 
-	to: keyof RootStackParamList;
+	to?: keyof RootStackParamList;
 	/**
 	 * The title of the button
 	 */
@@ -38,7 +38,7 @@ const ButtonPrimary: FC<IButtonPrimaryProps> = ({ title, to, rootClassName, text
 	return (
 		<TouchableOpacity
 			className={`py-3 px-16 bg-primary rounded-xl ${rootClassName}`}
-			onPress={() => navigation.navigate(to)}
+			onPress={() => to && navigation.navigate(to)}
 		>
 			<Text className={`text-white text-lg ${textClassName}`}>{title}</Text>
 		</TouchableOpacity>
