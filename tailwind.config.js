@@ -7,6 +7,7 @@ module.exports = {
 				grey: "#565656",
 				primary: "#56BAA7",
 				greyLight: "#868686",
+				accent: "#FF6364",
 			},
 			fontFamily: {
 				motserrat: ["Montserrat", "sans"],

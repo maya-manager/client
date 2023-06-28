@@ -1,4 +1,5 @@
-import React from "react";
+import React, { FC } from "react";
+import { Provider } from "react-redux";
 import { NavigationContainer, Theme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native";
@@ -7,6 +8,7 @@ import HomeScreen from "./screens/homeScreen/HomeScreen";
 import SignupScreen from "./screens/signupScreen/SignupScreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import Constants from "expo-constants";
+import store from "./store/store";
 
 export type RootStackParamList = {
 	Home: undefined;
@@ -28,7 +30,7 @@ const navigationThemeLight: Theme = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function App() {
+const Navigation: FC = () => {
 	return (
 		<NavigationContainer theme={navigationThemeLight}>
 			<SafeAreaView className="flex-1" style={{ paddingTop: Constants.statusBarHeight }}>
@@ -45,4 +47,14 @@ export default function App() {
 			</SafeAreaView>
 		</NavigationContainer>
 	);
-}
+};
+
+const App: FC = () => {
+	return (
+		<Provider store={store}>
+			<Navigation />
+		</Provider>
+	);
+};
+
+export default App;

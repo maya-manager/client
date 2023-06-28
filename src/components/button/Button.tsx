@@ -23,6 +23,11 @@ interface IButtonPrimaryProps {
 	 * Additional class names for the text element
 	 */
 	textClassName?: string;
+
+	/**
+	 * The function to call when the button is pressed
+	 */
+	onPress?: () => void;
 }
 
 /**
@@ -30,15 +35,21 @@ interface IButtonPrimaryProps {
  *
  * @example
  * ```tsx
- * <ButtonPrimary to="Signup" title="Get Started" rootClassName="mt-8" textClassName="font-bold" />
+ * <ButtonPrimary to="Signup" title="Get Started" rootClassName="mt-8" textClassName="font-bold" onPress={() => console.log("button pressed")} />
  * ```
  */
-const ButtonPrimary: FC<IButtonPrimaryProps> = ({ title, to, rootClassName, textClassName }) => {
+const ButtonPrimary: FC<IButtonPrimaryProps> = ({
+	title,
+	to,
+	rootClassName,
+	textClassName,
+	onPress,
+}) => {
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 	return (
 		<TouchableOpacity
-			className={`py-3 px-16 bg-primary rounded-xl ${rootClassName}`}
-			onPress={() => to && navigation.navigate(to)}
+			className={`py-3 px-16 bg-primary shadow-sm shadow-greyLight rounded-xl ${rootClassName}`}
+			onPress={() => (to ? navigation.navigate(to) : onPress())}
 		>
 			<Text className={`text-white text-lg ${textClassName}`}>{title}</Text>
 		</TouchableOpacity>

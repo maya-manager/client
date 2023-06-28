@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { Text, TextInput, View } from "react-native";
+import { Text, TextInput, TextInputProps, View } from "react-native";
 import constants from "../../common/constants";
 
-interface IInputProps {
+interface IInputProps extends TextInputProps {
 	/**
 	 * Placeholder for the input
 	 */
@@ -27,6 +27,16 @@ interface IInputProps {
 	 * Class name for the label
 	 */
 	labelClassName?: string;
+
+	/**
+	 * Error for input
+	 */
+	error?: string;
+
+	/**
+	 * If the input is required. this will only show `*` in the label
+	 */
+	required?: boolean;
 }
 
 /**
@@ -38,15 +48,32 @@ const Input: FC<IInputProps> = ({
 	rootClassName,
 	inputClassName,
 	labelClassName,
+	error,
+	onChangeText,
+	onBlur,
+	value,
+	required,
+	autoCapitalize,
 }) => {
 	return (
 		<View className={`w-[100vw] px-8 ${rootClassName}`}>
-			<Text className={labelClassName}>{label}</Text>
+			<Text className={`${error && "text-accent"} ${labelClassName}`}>
+				{label} {required && "*"}
+			</Text>
 			<TextInput
 				placeholder={placeholder}
-				className={`mt-3 border-solid border-lightgrey border-[0.2px] w-full rounded-md px-4 h-16 py-0 text-lg ${inputClassName}`}
-				placeholderTextColor={constants.colors.placeholders}
+				className={`mt-3 border-solid border-lightgrey border-[0.2px] w-full rounded-md px-4 h-16 py-0 text-lg ${
+					error && "border-accent"
+				} ${inputClassName}`}
+				placeholderTextColor={
+					error ? constants.colors.accent : constants.colors.placeholders
+				}
+				onChangeText={onChangeText}
+				onBlur={onBlur}
+				value={value}
+				autoCapitalize={autoCapitalize}
 			/>
+			{error && <Text className="text-accent mt-2">{error}</Text>}
 		</View>
 	);
 };
