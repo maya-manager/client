@@ -7,14 +7,17 @@ import ButtonPrimary from "../../components/button/Button";
 import { Formik } from "formik";
 import { IPostSignupSchema, postSignupSchema } from "../../api/schemas/auth.schema";
 import { postSignup } from "../../api/auth";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { alertActions } from "../../store/slices/alert.slice";
 
 const SignupScreen: FC = () => {
+	const dispatch = useAppDispatch();
+
 	const onSubmitHandler = async (values: IPostSignupSchema) => {
 		try {
 			await postSignup(values);
-		} catch (err) {
-			// TODO: show alert here
-			console.log(err);
+		} catch (err: any) {
+			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
 		}
 	};
 

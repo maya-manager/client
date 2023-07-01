@@ -1,4 +1,5 @@
 import { API_URL } from "@env";
+import Constants from "expo-constants";
 
 const constants = {
 	colors: {
@@ -11,6 +12,7 @@ const constants = {
 	environment: {
 		API_URL: API_URL,
 	},
+	statusBarHeight: Constants.statusBarHeight,
 };
 
 export default constants;
