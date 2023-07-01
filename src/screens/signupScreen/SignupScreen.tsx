@@ -9,8 +9,12 @@ import { IPostSignupSchema, postSignupSchema } from "../../api/schemas/auth.sche
 import { postSignup } from "../../api/auth";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { alertActions } from "../../store/slices/alert.slice";
+import { RootStackParamList } from "../../App";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-const SignupScreen: FC = () => {
+type SignupScreenProps = NativeStackScreenProps<RootStackParamList, "Signup">;
+
+const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 	const dispatch = useAppDispatch();
 
 	const onSubmitHandler = async (values: IPostSignupSchema) => {
@@ -18,6 +22,11 @@ const SignupScreen: FC = () => {
 			await postSignup(values);
 		} catch (err: any) {
 			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
+		} finally {
+			// TODO: Move this to try statement
+			navigation.navigate("VerifyOtp", {
+				email: values.email,
+			});
 		}
 	};
 
@@ -81,6 +90,7 @@ const SignupScreen: FC = () => {
 								value={values.email}
 								required
 								autoCapitalize="none"
+								keyboardType="email-address"
 							/>
 							<Input
 								label="Password"

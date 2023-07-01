@@ -54,11 +54,12 @@ const Input: FC<IInputProps> = ({
 	value,
 	required,
 	autoCapitalize,
+	keyboardType = "default",
 }) => {
 	return (
 		<View className={`w-[100vw] px-8 ${rootClassName}`}>
 			<Text className={`${error && "text-accent"} ${labelClassName}`}>
-				{label} {required && "*"}
+				{label}: {required && "*"}
 			</Text>
 			<TextInput
 				placeholder={placeholder}
@@ -72,6 +73,7 @@ const Input: FC<IInputProps> = ({
 				onBlur={onBlur}
 				value={value}
 				autoCapitalize={autoCapitalize}
+				keyboardType={keyboardType}
 			/>
 			{error && <Text className="text-accent mt-2">{error}</Text>}
 		</View>
