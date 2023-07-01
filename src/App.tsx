@@ -7,8 +7,8 @@ import constants from "./common/constants";
 import HomeScreen from "./screens/homeScreen/HomeScreen";
 import SignupScreen from "./screens/signupScreen/SignupScreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
-import Constants from "expo-constants";
-import store from "./store/store";
+import store from "./store";
+import AlertError from "./components/alert/Alert";
 
 export type RootStackParamList = {
 	Home: undefined;
@@ -33,7 +33,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Navigation: FC = () => {
 	return (
 		<NavigationContainer theme={navigationThemeLight}>
-			<SafeAreaView className="flex-1" style={{ paddingTop: Constants.statusBarHeight }}>
+			<SafeAreaView
+				className="flex-1 relative"
+				style={{ paddingTop: constants.statusBarHeight }}
+			>
+				<AlertError />
+
 				<Stack.Navigator
 					initialRouteName="Home"
 					screenOptions={{
