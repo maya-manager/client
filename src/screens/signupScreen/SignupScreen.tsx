@@ -20,13 +20,12 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 	const onSubmitHandler = async (values: IPostSignupSchema) => {
 		try {
 			await postSignup(values);
-		} catch (err: any) {
-			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
-		} finally {
-			// TODO: Move this to try statement
+
 			navigation.navigate("VerifyOtp", {
 				email: values.email,
 			});
+		} catch (err: any) {
+			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
 		}
 	};
 
