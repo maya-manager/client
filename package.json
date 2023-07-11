@@ -15,7 +15,7 @@
 		"prepare": "husky install"
 	},
 	"dependencies": {
-		"@expo/metro-config": "^0.7.1",
+		"@expo/metro-config": "^0.10.6",
 		"@expo/webpack-config": "^18.1.0",
 		"@react-navigation/native": "^6.1.6",
 		"@react-navigation/native-stack": "^6.9.12",
