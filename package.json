@@ -23,7 +23,7 @@
 		"axios": "^1.4.0",
 		"expo": "^48.0.19",
 		"expo-blur": "~12.3.0",
-		"expo-constants": "~14.2.1",
+		"expo-constants": "~14.4.2",
 		"expo-status-bar": "~1.4.4",
 		"formik": "^2.4.2",
 		"nativewind": "^2.0.11",
