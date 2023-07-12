@@ -1,12 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { clearAlertReducer, setAlertReducer } from "../reducers/alert.reducer";
 
-export interface IAlertState {
+export interface AlertState {
 	message: string | null;
 	type: "success" | "error" | "warning" | null;
 }
 
-const initialState: IAlertState = {
+const initialState: AlertState = {
 	message: null,
 	type: null,
 };

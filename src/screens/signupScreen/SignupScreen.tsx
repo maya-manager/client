@@ -5,21 +5,24 @@ import { HeadingPrimary } from "../../components/typography/Typography";
 import Input from "../../components/input/Input";
 import ButtonPrimary from "../../components/button/Button";
 import { Formik } from "formik";
-import { IPostSignupSchema, postSignupSchema } from "../../api/schemas/auth.schema";
-import { postSignup } from "../../api/auth";
+import {
+	PostSignupSchema,
+	postSignupHandler,
+	postSignupSchema,
+} from "../../store/actions/auth.action";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { alertActions } from "../../store/slices/alert.slice";
-import { RootStackParamList } from "../../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../App";
 
 type SignupScreenProps = NativeStackScreenProps<RootStackParamList, "Signup">;
 
 const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 	const dispatch = useAppDispatch();
 
-	const onSubmitHandler = async (values: IPostSignupSchema) => {
+	const onSubmitHandler = async (values: PostSignupSchema) => {
 		try {
-			await postSignup(values);
+			await dispatch(postSignupHandler(values));
 
 			navigation.navigate("VerifyOtp", {
 				email: values.email,
