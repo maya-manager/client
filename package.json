@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@expo/metro-config": "^0.10.6",
-		"@expo/webpack-config": "^18.1.0",
+		"@expo/webpack-config": "^18.1.1",
 		"@react-navigation/native": "^6.1.6",
 		"@react-navigation/native-stack": "^6.9.12",
 		"@reduxjs/toolkit": "^1.9.5",
