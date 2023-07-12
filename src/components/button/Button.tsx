@@ -1,6 +1,6 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { FC } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 import { RootStackParamList } from "../../App";
 
 interface IButtonPrimaryProps {
@@ -25,6 +25,16 @@ interface IButtonPrimaryProps {
 	textClassName?: string;
 
 	/**
+	 * Shows a loading indicator if true
+	 */
+	loading?: boolean;
+
+	/**
+	 * The text to show when loading is true
+	 */
+	loadingText?: string;
+
+	/**
 	 * The function to call when the button is pressed
 	 */
 	onPress?: () => void;
@@ -43,15 +53,20 @@ const ButtonPrimary: FC<IButtonPrimaryProps> = ({
 	to,
 	rootClassName,
 	textClassName,
+	loading,
+	loadingText,
 	onPress,
 }) => {
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 	return (
 		<TouchableOpacity
-			className={`py-3 px-16 bg-primary shadow-sm shadow-greyLight rounded-xl ${rootClassName}`}
+			className={`py-3 px-16 bg-primary shadow-sm shadow-greyLight rounded-xl flex-row justify-between ${rootClassName}`}
 			onPress={() => (to ? navigation.navigate(to) : onPress())}
 		>
-			<Text className={`text-white text-lg ${textClassName}`}>{title}</Text>
+			<Text className={`text-white text-lg ${textClassName}`}>
+				{loading ? loadingText : title}{" "}
+			</Text>
+			{loading && <ActivityIndicator color="#fff" className="ml-2" />}
 		</TouchableOpacity>
 	);
 };

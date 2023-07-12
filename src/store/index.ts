@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import alertSlice from "./slices/alert.slice";
+import authSlice from "./slices/auth.slice";
 
 /**
  * Redux store configuration
@@ -7,6 +8,7 @@ import alertSlice from "./slices/alert.slice";
 const store = configureStore({
 	reducer: {
 		alert: alertSlice,
+		auth: authSlice,
 	},
 });
 

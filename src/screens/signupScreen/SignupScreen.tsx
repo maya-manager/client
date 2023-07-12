@@ -14,11 +14,14 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { alertActions } from "../../store/slices/alert.slice";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { RootState } from "../../store";
 
 type SignupScreenProps = NativeStackScreenProps<RootStackParamList, "Signup">;
 
 const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 	const dispatch = useAppDispatch();
+	const { isSignupLoading } = useAppSelector((state: RootState) => state.auth);
 
 	const onSubmitHandler = async (values: PostSignupSchema) => {
 		try {
@@ -119,6 +122,8 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								title="Signup"
 								rootClassName="mt-5"
 								onPress={handleSubmit}
+								loadingText="Signing up..."
+								loading={isSignupLoading}
 							/>
 						</View>
 					)}
