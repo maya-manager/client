@@ -5,17 +5,14 @@ import { HeadingPrimary } from "../../components/typography/Typography";
 import Input from "../../components/input/Input";
 import ButtonPrimary from "../../components/button/Button";
 import { Formik } from "formik";
-import {
-	PostSignupSchema,
-	postSignupHandler,
-	postSignupSchema,
-} from "../../store/actions/auth.action";
+import { PostSignupSchema, postSignupSchema } from "../../store/actions/schemas/auth.schema";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { alertActions } from "../../store/slices/alert.slice";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { RootState } from "../../store";
+import { postSignupHandler } from "../../store/actions/auth.action";
 
 type SignupScreenProps = NativeStackScreenProps<RootStackParamList, "Signup">;
 
@@ -26,12 +23,14 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 	const onSubmitHandler = async (values: PostSignupSchema) => {
 		try {
 			await dispatch(postSignupHandler(values));
-
+		} catch (err: any) {
+			// TODO: don't show direct errors from server instead do error handling in client
+			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
+		} finally {
+			// TODO: move this to try block
 			navigation.navigate("VerifyOtp", {
 				email: values.email,
 			});
-		} catch (err: any) {
-			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
 		}
 	};
 

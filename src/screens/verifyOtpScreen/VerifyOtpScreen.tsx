@@ -4,8 +4,39 @@ import Header from "../../components/header/Header";
 import { HeadingPrimary, ParaPrimary } from "../../components/typography/Typography";
 import Input from "../../components/input/Input";
 import ButtonPrimary from "../../components/button/Button";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { RootStackParamList } from "../../App";
+import { Formik } from "formik";
+import {
+	GetVerifyAccountSchema,
+	getVerifyAccountSchema,
+} from "../../store/actions/schemas/auth.schema";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { RootState } from "../../store";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { getVerifyAccountHandler } from "../../store/actions/auth.action";
+import { alertActions } from "../../store/slices/alert.slice";
 
 const VerifyOtpScreen: FC = () => {
+	const route = useRoute<RouteProp<RootStackParamList, "VerifyOtp">>();
+	const { email } = route.params;
+
+	const dispatch = useAppDispatch();
+
+	const { isVerifyAccountLoading } = useAppSelector((state: RootState) => state.auth);
+
+	const onSubmitHandler = async (values: GetVerifyAccountSchema) => {
+		try {
+			await dispatch(getVerifyAccountHandler(values));
+
+			// TODO: navigate to login page
+			console.log("success");
+		} catch (err: any) {
+			// TODO: don't show direct errors from server instead do error handling in client
+			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
+		}
+	};
+
 	return (
 		<ScrollView>
 			<Header />
@@ -26,10 +57,34 @@ const VerifyOtpScreen: FC = () => {
 					/>
 				</View>
 
-				<View className="mt-8 items-center">
-					<Input label="OTP" placeholder="1234" keyboardType="numeric" />
-					<ButtonPrimary title="Verify" rootClassName="mt-8" />
-				</View>
+				<Formik
+					validationSchema={getVerifyAccountSchema}
+					initialValues={{ email, verification_code: "" }}
+					onSubmit={onSubmitHandler}
+				>
+					{({ handleSubmit, errors, handleChange, handleBlur, values }) => (
+						<View className="mt-8 items-center">
+							<Input
+								label="OTP"
+								placeholder="1234"
+								keyboardType="numeric"
+								error={errors.verification_code}
+								onChangeText={handleChange("verification_code")}
+								onBlur={handleBlur("name")}
+								value={values.verification_code}
+								required
+							/>
+
+							<ButtonPrimary
+								title="Verify"
+								rootClassName="mt-8"
+								onPress={handleSubmit}
+								loading={isVerifyAccountLoading}
+								loadingText="Verifying..."
+							/>
+						</View>
+					)}
+				</Formik>
 			</View>
 		</ScrollView>
 	);

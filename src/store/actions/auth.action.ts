@@ -1,19 +1,7 @@
 import api, { APIResponseSuccess } from "../../common/utils/api.util";
-import * as Yup from "yup";
 import { authActions } from "../slices/auth.slice";
 import { Dispatch } from "@reduxjs/toolkit";
-
-export const postSignupSchema = Yup.object().shape({
-	name: Yup.string().required("This is required"),
-	email: Yup.string().email("Invalid email").required("This is required"),
-	username: Yup.string().required("This is required"),
-	password: Yup.string().required("This required"),
-	cpassword: Yup.string()
-		.required("This is required")
-		.oneOf([Yup.ref("password"), null], "Passwords must match"),
-});
-
-export type PostSignupSchema = Yup.InferType<typeof postSignupSchema>;
+import { GetVerifyAccountSchema, PostSignupSchema } from "./schemas/auth.schema";
 
 export const postSignupHandler = (payload: PostSignupSchema) => {
 	return async (dispatch: Dispatch) => {
@@ -26,6 +14,24 @@ export const postSignupHandler = (payload: PostSignupSchema) => {
 			return Promise.reject(err);
 		} finally {
 			dispatch(authActions.setIsSignupLoading(false));
+		}
+	};
+};
+
+export const getVerifyAccountHandler = (payload: GetVerifyAccountSchema) => {
+	return async (dispatch: Dispatch) => {
+		try {
+			dispatch(authActions.setIsVerifyAccountLoading(true));
+
+			const response = await api.get<APIResponseSuccess>(
+				`/auth/verify/${payload.email}/${payload.verification_code}`,
+			);
+
+			return Promise.resolve(response.data);
+		} catch (err: any) {
+			return Promise.reject(err);
+		} finally {
+			dispatch(authActions.setIsVerifyAccountLoading(false));
 		}
 	};
 };
