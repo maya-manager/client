@@ -5,27 +5,32 @@ import { HeadingPrimary } from "../../components/typography/Typography";
 import Input from "../../components/input/Input";
 import ButtonPrimary from "../../components/button/Button";
 import { Formik } from "formik";
-import { IPostSignupSchema, postSignupSchema } from "../../api/schemas/auth.schema";
-import { postSignup } from "../../api/auth";
+import { PostSignupSchema, postSignupSchema } from "../../store/actions/schemas/auth.schema";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { alertActions } from "../../store/slices/alert.slice";
-import { RootStackParamList } from "../../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../App";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { RootState } from "../../store";
+import { postSignupHandler } from "../../store/actions/auth.action";
 
 type SignupScreenProps = NativeStackScreenProps<RootStackParamList, "Signup">;
 
 const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 	const dispatch = useAppDispatch();
+	const { isSignupLoading } = useAppSelector((state: RootState) => state.auth);
 
-	const onSubmitHandler = async (values: IPostSignupSchema) => {
+	const onSubmitHandler = async (values: PostSignupSchema) => {
 		try {
-			await postSignup(values);
-
+			await dispatch(postSignupHandler(values));
+		} catch (err: any) {
+			// TODO: don't show direct errors from server instead do error handling in client
+			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
+		} finally {
+			// TODO: move this to try block
 			navigation.navigate("VerifyOtp", {
 				email: values.email,
 			});
-		} catch (err: any) {
-			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
 		}
 	};
 
@@ -116,6 +121,8 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								title="Signup"
 								rootClassName="mt-5"
 								onPress={handleSubmit}
+								loadingText="Signing up..."
+								loading={isSignupLoading}
 							/>
 						</View>
 					)}
