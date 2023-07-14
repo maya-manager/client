@@ -1,14 +1,10 @@
 import { View, Text, Image, ScrollView } from "react-native";
 import React, { FC } from "react";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../App";
 import Button from "../../components/button/Button";
 import Header from "../../components/header/Header";
 import { Heading, Para } from "../../components/typography/Typography";
 
-type HomeScreenProps = NativeStackScreenProps<RootStackParamList, "Home">;
-
-const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+const HomeScreen: FC = () => {
 	return (
 		<ScrollView>
 			<Header />
