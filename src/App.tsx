@@ -9,7 +9,7 @@ import SignupScreen from "./screens/signupScreen/SignupScreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import store from "./store";
 import AlertError from "./components/alert/Alert";
-import VerifyOtpScreen from "./screens/verifyOtpScreen/VerifyOtpScreen";
+import VerifyAccountScreen from "./screens/verifyOtpScreen/VerifyOtpScreen";
 
 const navigationThemeLight: Theme = {
 	dark: false,
@@ -30,7 +30,7 @@ export type RootStackParamList = {
 	Home: undefined;
 	Login: undefined;
 	Signup: undefined;
-	VerifyOtp: {
+	VerifyAccount: {
 		email: string;
 	};
 };
@@ -47,6 +47,7 @@ const Navigation: FC = () => {
 				<AlertError />
 
 				<Stack.Navigator
+					// TODO: this should be home route
 					initialRouteName="Home"
 					screenOptions={{
 						headerShown: false,
@@ -54,7 +55,7 @@ const Navigation: FC = () => {
 				>
 					<Stack.Screen name="Home" component={HomeScreen} />
 					<Stack.Screen name="Signup" component={SignupScreen} />
-					<Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
+					<Stack.Screen name="VerifyAccount" component={VerifyAccountScreen} />
 					<Stack.Screen name="Login" component={LoginScreen} />
 				</Stack.Navigator>
 			</SafeAreaView>

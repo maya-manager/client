@@ -1,18 +1,19 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { FC } from "react";
-import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { RootStackParamList } from "../../App";
 
-interface IButtonPrimaryProps {
+interface ButtonProps extends TouchableOpacityProps {
 	/**
 	 * The screen to navigate to
 	 */
 
 	to?: keyof RootStackParamList;
+
 	/**
-	 * The title of the button
+	 * The type of button
 	 */
-	title: string;
+	type?: "contained" | "link";
 
 	/**
 	 * Additional class names for the root background element
@@ -45,11 +46,12 @@ interface IButtonPrimaryProps {
  *
  * @example
  * ```tsx
- * <ButtonPrimary to="Signup" title="Get Started" rootClassName="mt-8" textClassName="font-bold" onPress={() => console.log("button pressed")} />
+ * <Button to="Signup" rootClassName="mt-8" textClassName="font-bold" onPress={() => console.log("button pressed")}>Get Started</Button>
  * ```
  */
-const ButtonPrimary: FC<IButtonPrimaryProps> = ({
-	title,
+const Button: FC<ButtonProps> = ({
+	children,
+	type = "contained",
 	to,
 	rootClassName,
 	textClassName,
@@ -59,16 +61,33 @@ const ButtonPrimary: FC<IButtonPrimaryProps> = ({
 }) => {
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 	return (
-		<TouchableOpacity
-			className={`py-3 px-16 bg-primary shadow-sm shadow-greyLight rounded-xl flex-row justify-between ${rootClassName}`}
-			onPress={() => (to ? navigation.navigate(to) : onPress())}
-		>
-			<Text className={`text-white text-lg ${textClassName}`}>
-				{loading ? loadingText : title}{" "}
-			</Text>
-			{loading && <ActivityIndicator color="#fff" className="ml-2" />}
-		</TouchableOpacity>
+		<>
+			{type === "contained" && (
+				<TouchableOpacity
+					className={`py-3 px-16 bg-primary shadow-sm shadow-greyLight rounded-xl flex-row justify-between ${rootClassName}`}
+					onPress={() => (to ? navigation.navigate(to) : onPress())}
+				>
+					<Text className={`text-white text-lg ${textClassName}`}>
+						{loading ? loadingText : children}{" "}
+					</Text>
+					{loading && <ActivityIndicator color="#fff" className="ml-2" />}
+				</TouchableOpacity>
+			)}
+
+			{type === "link" && (
+				<TouchableOpacity
+					className="items-center justify-center"
+					onPress={() => navigation.navigate(to)}
+				>
+					<Text
+						className={`text-primary text-lg underline font-semibold ${textClassName}`}
+					>
+						{children}
+					</Text>
+				</TouchableOpacity>
+			)}
+		</>
 	);
 };
 
-export default ButtonPrimary;
+export default Button;

@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Image, ScrollView, View } from "react-native";
 import Header from "../../components/header/Header";
-import { HeadingPrimary, ParaPrimary } from "../../components/typography/Typography";
+import { Heading, Para } from "../../components/typography/Typography";
 import Input from "../../components/input/Input";
-import ButtonPrimary from "../../components/button/Button";
+import Button from "../../components/button/Button";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { RootStackParamList } from "../../App";
 import { Formik } from "formik";
@@ -16,9 +16,12 @@ import { RootState } from "../../store";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { getVerifyAccountHandler } from "../../store/actions/auth.action";
 import { alertActions } from "../../store/slices/alert.slice";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-const VerifyOtpScreen: FC = () => {
-	const route = useRoute<RouteProp<RootStackParamList, "VerifyOtp">>();
+type VerifyAccountScreenProps = NativeStackScreenProps<RootStackParamList, "VerifyAccount">;
+
+const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
+	const route = useRoute<RouteProp<RootStackParamList, "VerifyAccount">>();
 	const { email } = route.params;
 
 	const dispatch = useAppDispatch();
@@ -28,12 +31,12 @@ const VerifyOtpScreen: FC = () => {
 	const onSubmitHandler = async (values: GetVerifyAccountSchema) => {
 		try {
 			await dispatch(getVerifyAccountHandler(values));
-
-			// TODO: navigate to login page
-			console.log("success");
 		} catch (err: any) {
 			// TODO: don't show direct errors from server instead do error handling in client
 			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
+		} finally {
+			// TODO: move this to try block
+			navigation.navigate("Login");
 		}
 	};
 
@@ -50,8 +53,8 @@ const VerifyOtpScreen: FC = () => {
 				</View>
 
 				<View className="px-8">
-					<HeadingPrimary title="Please verify your account" />
-					<ParaPrimary
+					<Heading title="Please verify your account" />
+					<Para
 						rootClassName="mt-8"
 						title="An OTP is sent to your email please enter that here"
 					/>
@@ -75,7 +78,7 @@ const VerifyOtpScreen: FC = () => {
 								required
 							/>
 
-							<ButtonPrimary
+							<Button
 								title="Verify"
 								rootClassName="mt-8"
 								onPress={handleSubmit}
@@ -90,4 +93,4 @@ const VerifyOtpScreen: FC = () => {
 	);
 };
 
-export default VerifyOtpScreen;
+export default VerifyAccountScreen;

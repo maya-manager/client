@@ -1,12 +1,7 @@
-import React, { FC, ReactNode } from "react";
-import { Text } from "react-native";
+import React, { FC } from "react";
+import { Text, TextProps } from "react-native";
 
-interface IHeadingPrimaryProps {
-	/**
-	 * The title of the heading
-	 */
-	title: string | ReactNode;
-
+interface HeadingProps extends TextProps {
 	/**
 	 * Additional class names
 	 */
@@ -18,23 +13,18 @@ interface IHeadingPrimaryProps {
  *
  * @example
  * ```tsx
- * <HeadingPrimary title="Signup" rootClassName="mt-5" />
+ * <Heading rootClassName="mt-5">Welcome to maya</Heading>
  * ```
  */
-export const HeadingPrimary: FC<IHeadingPrimaryProps> = ({ title, rootClassName }) => {
+export const Heading: FC<HeadingProps> = ({ children, rootClassName }) => {
 	return (
 		<Text className={`text-lightgrey text-center font-semibold text-2xl ${rootClassName}`}>
-			{title}
+			{children}
 		</Text>
 	);
 };
 
-interface IParaPrimaryProps {
-	/**
-	 * The title of the paragraph
-	 */
-	title: string | ReactNode;
-
+interface ParaProps extends TextProps {
 	/**
 	 * Additional class names
 	 */
@@ -46,9 +36,11 @@ interface IParaPrimaryProps {
  *
  * @example
  * ```tsx
- * <ParaPrimary title="Join us now and let us take care of all your stress to manage your money" rootClassName="mt-8" />
+ * <Para rootClassName="mt-8">Join us now and let us take care of all your stress to manage your money</Para>
  * ```
  */
-export const ParaPrimary: FC<IParaPrimaryProps> = ({ title, rootClassName }) => {
-	return <Text className={`text-lg tracking-widest font-light ${rootClassName}`}>{title}</Text>;
+export const Para: FC<ParaProps> = ({ children, rootClassName }) => {
+	return (
+		<Text className={`text-lg tracking-widest font-light ${rootClassName}`}>{children}</Text>
+	);
 };

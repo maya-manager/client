@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { View, ScrollView, Image } from "react-native";
 import Header from "../../components/header/Header";
-import { HeadingPrimary } from "../../components/typography/Typography";
+import { Heading } from "../../components/typography/Typography";
 import Input from "../../components/input/Input";
-import ButtonPrimary from "../../components/button/Button";
+import Button from "../../components/button/Button";
 import { Formik } from "formik";
 import { PostSignupSchema, postSignupSchema } from "../../store/actions/schemas/auth.schema";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
@@ -28,7 +28,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
 		} finally {
 			// TODO: move this to try block
-			navigation.navigate("VerifyOtp", {
+			navigation.navigate("VerifyAccount", {
 				email: values.email,
 			});
 		}
@@ -47,7 +47,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 				</View>
 
 				<View>
-					<HeadingPrimary title="Welcome to our family" />
+					<Heading>Welcome to our family</Heading>
 				</View>
 
 				<Formik
@@ -117,13 +117,16 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								required
 							/>
 
-							<ButtonPrimary
-								title="Signup"
+							{/* TODO: add already have account line */}
+
+							<Button
 								rootClassName="mt-5"
 								onPress={handleSubmit}
 								loadingText="Signing up..."
 								loading={isSignupLoading}
-							/>
+							>
+								Signup
+							</Button>
 						</View>
 					)}
 				</Formik>

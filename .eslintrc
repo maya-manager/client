@@ -45,6 +45,7 @@
 	"rules": {
 		"react/boolean-prop-naming": "error",
 		"react/react-in-jsx-scope": "off",
+		"react-native/no-raw-text": "off",
 		"semi": "error",
 		"no-console": "warn",
 		"no-tabs": "off",
