@@ -11,3 +11,7 @@ export const setIsVerifyAccountLoadingReducer = (
 ) => {
 	state.isVerifyAccountLoading = action.payload;
 };
+
+export const setIsLoginLoadingReducer = (state: AuthState, action: PayloadAction<boolean>) => {
+	state.isLoginLoading = action.payload;
+};

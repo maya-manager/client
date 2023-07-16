@@ -35,7 +35,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 	};
 
 	return (
-		<ScrollView>
+		<ScrollView automaticallyAdjustKeyboardInsets>
 			<Header />
 
 			<View className="items-center">

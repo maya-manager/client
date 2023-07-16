@@ -41,7 +41,7 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 	};
 
 	return (
-		<ScrollView>
+		<ScrollView automaticallyAdjustKeyboardInsets>
 			<Header />
 
 			<View className="items-center">
@@ -53,11 +53,10 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 				</View>
 
 				<View className="px-8">
-					<Heading title="Please verify your account" />
-					<Para
-						rootClassName="mt-8"
-						title="An OTP is sent to your email please enter that here"
-					/>
+					<Heading>Please verify your account</Heading>
+					<Para rootClassName="mt-8">
+						An OTP is sent to your email please enter that here
+					</Para>
 				</View>
 
 				<Formik
@@ -79,12 +78,13 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 							/>
 
 							<Button
-								title="Verify"
 								rootClassName="mt-8"
 								onPress={handleSubmit}
 								loading={isVerifyAccountLoading}
 								loadingText="Verifying..."
-							/>
+							>
+								Verify
+							</Button>
 						</View>
 					)}
 				</Formik>

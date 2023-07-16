@@ -18,3 +18,10 @@ export const getVerifyAccountSchema = Yup.object().shape({
 });
 
 export type GetVerifyAccountSchema = Yup.InferType<typeof getVerifyAccountSchema>;
+
+export const postLoginSchema = Yup.object().shape({
+	email_username: Yup.string().required("This is required"),
+	password: Yup.string().required("This is required"),
+});
+
+export type PostLoginSchema = Yup.InferType<typeof postLoginSchema>;
