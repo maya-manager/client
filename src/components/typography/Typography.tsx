@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Text, TextProps } from "react-native";
+import { Pressable, Text, TextProps } from "react-native";
 
 interface HeadingProps extends TextProps {
 	/**
@@ -29,6 +29,8 @@ interface ParaProps extends TextProps {
 	 * Additional class names
 	 */
 	rootClassName?: string;
+
+	onPress?: () => void;
 }
 
 /**
@@ -39,8 +41,12 @@ interface ParaProps extends TextProps {
  * <Para rootClassName="mt-8">Join us now and let us take care of all your stress to manage your money</Para>
  * ```
  */
-export const Para: FC<ParaProps> = ({ children, rootClassName }) => {
+export const Para: FC<ParaProps> = ({ children, rootClassName, onPress }) => {
 	return (
-		<Text className={`text-lg tracking-widest font-light ${rootClassName}`}>{children}</Text>
+		<Pressable onPress={onPress}>
+			<Text className={`text-lg tracking-widest font-light ${rootClassName}`}>
+				{children}
+			</Text>
+		</Pressable>
 	);
 };

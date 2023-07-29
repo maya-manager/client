@@ -9,14 +9,14 @@ import { PostLoginSchema, postLoginSchema } from "../../store/actions/schemas/au
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { RootState } from "../../store";
-import { postLoginHandler } from "../../store/actions/auth.action";
+import { postLoginAction } from "../../store/actions/auth.action";
 
 const LoginScreen = () => {
 	const dispatch = useAppDispatch();
 	const { isLoginLoading } = useAppSelector((state: RootState) => state.auth);
 
 	const onSubmitHandler = (values: PostLoginSchema) => {
-		dispatch(postLoginHandler(values));
+		dispatch(postLoginAction(values));
 	};
 
 	return (

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Image, ScrollView, View } from "react-native";
 import Header from "../../components/header/Header";
 import { Heading, Para } from "../../components/typography/Typography";
@@ -14,7 +14,10 @@ import {
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { RootState } from "../../store";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { getVerifyAccountHandler } from "../../store/actions/auth.action";
+import {
+	getVerifyAccountAction,
+	getResendVerificationCodeAction,
+} from "../../store/actions/auth.action";
 import { alertActions } from "../../store/slices/alert.slice";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -28,9 +31,19 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 
 	const { isVerifyAccountLoading } = useAppSelector((state: RootState) => state.auth);
 
+	const [resendOtpCounter, setResendOtpCounter] = useState(30);
+
+	useEffect(() => {
+		if (resendOtpCounter > 0) {
+			setTimeout(() => {
+				setResendOtpCounter((prev) => prev - 1);
+			}, 1000);
+		}
+	}, [resendOtpCounter]);
+
 	const onSubmitHandler = async (values: GetVerifyAccountSchema) => {
 		try {
-			await dispatch(getVerifyAccountHandler(values));
+			await dispatch(getVerifyAccountAction(values));
 		} catch (err: any) {
 			// TODO: don't show direct errors from server instead do error handling in client
 			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
@@ -38,6 +51,12 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 			// TODO: move this to try block
 			navigation.navigate("Login");
 		}
+	};
+
+	const onResendOtpHandler = async () => {
+		await dispatch(getResendVerificationCodeAction(email));
+		//TODO: give success feedback to user
+		setResendOtpCounter(30);
 	};
 
 	return (
@@ -76,6 +95,21 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 								value={values.verification_code}
 								required
 							/>
+
+							<View className="mt-5">
+								{resendOtpCounter ? (
+									<Para rootClassName="text-greyLight">
+										Resend OTP in {resendOtpCounter}s
+									</Para>
+								) : (
+									<Para
+										rootClassName="underline text-accent"
+										onPress={onResendOtpHandler}
+									>
+										Resend OTP
+									</Para>
+								)}
+							</View>
 
 							<Button
 								rootClassName="mt-8"

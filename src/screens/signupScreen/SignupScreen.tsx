@@ -12,7 +12,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { RootState } from "../../store";
-import { postSignupHandler } from "../../store/actions/auth.action";
+import { postSignupAction } from "../../store/actions/auth.action";
 
 type SignupScreenProps = NativeStackScreenProps<RootStackParamList, "Signup">;
 
@@ -22,7 +22,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 
 	const onSubmitHandler = async (values: PostSignupSchema) => {
 		try {
-			await dispatch(postSignupHandler(values));
+			await dispatch(postSignupAction(values));
 		} catch (err: any) {
 			// TODO: don't show direct errors from server instead do error handling in client
 			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
@@ -105,6 +105,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								onBlur={handleBlur("password")}
 								value={values.password}
 								required
+								autoCapitalize="none"
 							/>
 							<Input
 								label="Confirm Password"
@@ -115,6 +116,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								onBlur={handleBlur("cpassword")}
 								value={values.cpassword}
 								required
+								autoCapitalize="none"
 							/>
 
 							{/* TODO: add already have account line */}

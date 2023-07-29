@@ -4,7 +4,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { GetVerifyAccountSchema, PostLoginSchema, PostSignupSchema } from "./schemas/auth.schema";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const postSignupHandler = (payload: PostSignupSchema) => {
+export const postSignupAction = (payload: PostSignupSchema) => {
 	return async (dispatch: Dispatch) => {
 		try {
 			dispatch(authActions.setIsSignupLoading(true));
@@ -19,13 +19,24 @@ export const postSignupHandler = (payload: PostSignupSchema) => {
 	};
 };
 
-export const getVerifyAccountHandler = (payload: GetVerifyAccountSchema) => {
+export const getResendVerificationCodeAction = (email: string) => {
+	return async () => {
+		try {
+			const response = await api.get<APIResponseSuccess>(`/auth/verify/${email}/resend`);
+			return Promise.resolve(response.data.message);
+		} catch (err: any) {
+			return Promise.reject(err);
+		}
+	};
+};
+
+export const getVerifyAccountAction = (payload: GetVerifyAccountSchema) => {
 	return async (dispatch: Dispatch) => {
 		try {
 			dispatch(authActions.setIsVerifyAccountLoading(true));
 
 			const response = await api.get<APIResponseSuccess>(
-				`/auth/verify/${payload.email}/${payload.verification_code}`,
+				`/auth/verify/${payload.email}?vc=${payload.verification_code}`,
 			);
 
 			return Promise.resolve(response.data);
@@ -42,7 +53,7 @@ interface PostLoginSuccessResponse extends APIResponseSuccess {
 	refresh_token: string;
 }
 
-export const postLoginHandler = (payload: PostLoginSchema) => {
+export const postLoginAction = (payload: PostLoginSchema) => {
 	return async (dispatch: Dispatch) => {
 		try {
 			dispatch(authActions.setIsLoginLoading(true));
