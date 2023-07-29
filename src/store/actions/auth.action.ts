@@ -20,12 +20,17 @@ export const postSignupAction = (payload: PostSignupSchema) => {
 };
 
 export const getResendVerificationCodeAction = (email: string) => {
-	return async () => {
+	return async (dispatch: Dispatch) => {
 		try {
+			dispatch(authActions.setIsResendVerificationCodeLoading(true));
+
 			const response = await api.get<APIResponseSuccess>(`/auth/verify/${email}/resend`);
+
 			return Promise.resolve(response.data.message);
 		} catch (err: any) {
 			return Promise.reject(err);
+		} finally {
+			dispatch(authActions.setIsResendVerificationCodeLoading(false));
 		}
 	};
 };

@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Image, ScrollView, View } from "react-native";
+import { ActivityIndicator, Image, ScrollView, TouchableOpacity, View } from "react-native";
 import Header from "../../components/header/Header";
 import { Heading, Para } from "../../components/typography/Typography";
 import Input from "../../components/input/Input";
@@ -29,7 +29,9 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 
 	const dispatch = useAppDispatch();
 
-	const { isVerifyAccountLoading } = useAppSelector((state: RootState) => state.auth);
+	const { isVerifyAccountLoading, isResendVerificationCodeLoading } = useAppSelector(
+		(state: RootState) => state.auth,
+	);
 
 	const [resendOtpCounter, setResendOtpCounter] = useState(30);
 
@@ -54,9 +56,14 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 	};
 
 	const onResendOtpHandler = async () => {
-		await dispatch(getResendVerificationCodeAction(email));
-		//TODO: give success feedback to user
-		setResendOtpCounter(30);
+		try {
+			await dispatch(getResendVerificationCodeAction(email));
+			dispatch(alertActions.setAlert({ type: "success", message: "OTP sent successfully" }));
+		} catch (err: any) {
+			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
+		} finally {
+			setResendOtpCounter(30);
+		}
 	};
 
 	return (
@@ -102,12 +109,17 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 										Resend OTP in {resendOtpCounter}s
 									</Para>
 								) : (
-									<Para
-										rootClassName="underline text-accent"
-										onPress={onResendOtpHandler}
-									>
-										Resend OTP
-									</Para>
+									<TouchableOpacity onPress={onResendOtpHandler}>
+										<Para
+											rootClassName="underline text-accent"
+											onPress={onResendOtpHandler}
+										>
+											Resend OTP{" "}
+											{isResendVerificationCodeLoading && (
+												<ActivityIndicator color="#FF6364" />
+											)}
+										</Para>
+									</TouchableOpacity>
 								)}
 							</View>
 

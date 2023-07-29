@@ -15,3 +15,10 @@ export const setIsVerifyAccountLoadingReducer = (
 export const setIsLoginLoadingReducer = (state: AuthState, action: PayloadAction<boolean>) => {
 	state.isLoginLoading = action.payload;
 };
+
+export const setIsResendVerificationCodeLoadingReducer = (
+	state: AuthState,
+	action: PayloadAction<boolean>,
+) => {
+	state.isResendVerificationCodeLoading = action.payload;
+};

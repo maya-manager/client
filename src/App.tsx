@@ -8,8 +8,8 @@ import HomeScreen from "./screens/homeScreen/HomeScreen";
 import SignupScreen from "./screens/signupScreen/SignupScreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import store from "./store";
-import AlertError from "./components/alert/Alert";
 import VerifyAccountScreen from "./screens/verifyOtpScreen/VerifyOtpScreen";
+import { AlertError, AlertSuccess } from "./components/alert/Alert";
 
 const navigationThemeLight: Theme = {
 	dark: false,
@@ -45,6 +45,7 @@ const Navigation: FC = () => {
 				style={{ paddingTop: constants.statusBarHeight }}
 			>
 				<AlertError />
+				<AlertSuccess />
 
 				<Stack.Navigator
 					// TODO: this should be home route
