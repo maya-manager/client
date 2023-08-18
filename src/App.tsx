@@ -36,6 +36,7 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+export const initialRouteName: keyof RootStackParamList = "Home";
 
 const Navigation: FC = () => {
 	return (
@@ -48,8 +49,7 @@ const Navigation: FC = () => {
 				<AlertSuccess />
 
 				<Stack.Navigator
-					// TODO: this should be home route
-					initialRouteName="Home"
+					initialRouteName={initialRouteName}
 					screenOptions={{
 						headerShown: false,
 					}}
