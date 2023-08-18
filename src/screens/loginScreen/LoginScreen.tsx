@@ -60,6 +60,7 @@ const LoginScreen = () => {
 								error={errors.password}
 								value={values.password}
 								autoCapitalize="none"
+								type="password"
 							/>
 
 							<View className="flex-row items-center mt-5">

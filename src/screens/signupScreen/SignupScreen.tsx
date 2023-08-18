@@ -23,14 +23,13 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 	const onSubmitHandler = async (values: PostSignupSchema) => {
 		try {
 			await dispatch(postSignupAction(values));
-		} catch (err: any) {
-			// TODO: don't show direct errors from server instead do error handling in client
-			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
-		} finally {
-			// TODO: move this to try block
+
 			navigation.navigate("VerifyAccount", {
 				email: values.email,
 			});
+		} catch (err: any) {
+			// TODO: don't show direct errors from server instead do error handling in client
+			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
 		}
 	};
 
@@ -106,6 +105,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								value={values.password}
 								required
 								autoCapitalize="none"
+								type="password"
 							/>
 							<Input
 								label="Confirm Password"
@@ -117,6 +117,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								value={values.cpassword}
 								required
 								autoCapitalize="none"
+								type="password"
 							/>
 
 							{/* TODO: add already have account line */}

@@ -37,6 +37,13 @@ interface IInputProps extends TextInputProps {
 	 * If the input is required. this will only show `*` in the label
 	 */
 	required?: boolean;
+
+	/**
+	 * Type of the input
+	 *
+	 * @default "text"
+	 */
+	type?: "text" | "password";
 }
 
 /**
@@ -55,6 +62,7 @@ const Input: FC<IInputProps> = ({
 	required,
 	autoCapitalize,
 	keyboardType = "default",
+	type = "text",
 }) => {
 	return (
 		<View className={`w-[100vw] px-8 ${rootClassName}`}>
@@ -63,7 +71,7 @@ const Input: FC<IInputProps> = ({
 			</Text>
 			<TextInput
 				placeholder={placeholder}
-				className={`mt-3 border-solid border-lightgrey border-[0.2px] w-full rounded-md px-4 pb-4 pt-2 text-lg ${
+				className={`mt-3 border-solid border-lightgrey border-[0.2px] w-full rounded-md px-4 h-16 pb-3 pt-2 text-lg ${
 					error && "border-accent"
 				} ${inputClassName}`}
 				placeholderTextColor={
@@ -75,7 +83,7 @@ const Input: FC<IInputProps> = ({
 				autoCapitalize={autoCapitalize}
 				keyboardType={keyboardType}
 				textAlignVertical="center"
-				// secureTextEntry={true}
+				secureTextEntry={type === "password"}
 			/>
 			{error && <Text className="text-accent mt-2">{error}</Text>}
 		</View>
