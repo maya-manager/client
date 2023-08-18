@@ -63,7 +63,7 @@ const Input: FC<IInputProps> = ({
 			</Text>
 			<TextInput
 				placeholder={placeholder}
-				className={`mt-3 border-solid border-lightgrey border-[0.2px] w-full rounded-md px-4 h-16 pb-[6px] text-lg ${
+				className={`mt-3 border-solid border-lightgrey border-[0.2px] w-full rounded-md px-4 pb-4 pt-2 text-lg ${
 					error && "border-accent"
 				} ${inputClassName}`}
 				placeholderTextColor={
@@ -74,6 +74,8 @@ const Input: FC<IInputProps> = ({
 				value={value}
 				autoCapitalize={autoCapitalize}
 				keyboardType={keyboardType}
+				textAlignVertical="center"
+				// secureTextEntry={true}
 			/>
 			{error && <Text className="text-accent mt-2">{error}</Text>}
 		</View>
