@@ -77,7 +77,7 @@ const Button: FC<ButtonProps> = ({
 			{type === "link" && (
 				<TouchableOpacity
 					className="items-center justify-center"
-					onPress={() => navigation.navigate(to)}
+					onPress={() => to && navigation.navigate(to)}
 				>
 					<Text
 						className={`text-primary text-lg underline font-semibold ${textClassName}`}

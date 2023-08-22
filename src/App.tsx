@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { Provider } from "react-redux";
-import { NavigationContainer, Theme } from "@react-navigation/native";
+import { NavigationContainer, Theme, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SafeAreaView } from "react-native";
+import { Image, SafeAreaView, View } from "react-native";
 import constants from "./common/constants";
 import HomeScreen from "./screens/homeScreen/HomeScreen";
 import SignupScreen from "./screens/signupScreen/SignupScreen";
@@ -38,28 +38,43 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export const initialRouteName: keyof RootStackParamList = "Home";
 
+const Logo: FC = () => {
+	return (
+		<Image
+			className="h-10 w-10 mb-2 flex items-center justify-center rounded-full"
+			source={require("../assets/logos/icon.png")}
+		/>
+	);
+};
+
 const Navigation: FC = () => {
 	return (
 		<NavigationContainer theme={navigationThemeLight}>
-			<SafeAreaView
-				className="flex-1 relative"
-				style={{ paddingTop: constants.statusBarHeight }}
-			>
+			<SafeAreaView className="flex-0" />
+
+			<View className="flex-1">
 				<AlertError />
 				<AlertSuccess />
 
 				<Stack.Navigator
 					initialRouteName={initialRouteName}
 					screenOptions={{
-						headerShown: false,
+						headerBackTitleVisible: false,
 					}}
 				>
-					<Stack.Screen name="Home" component={HomeScreen} />
+					<Stack.Screen
+						name="Home"
+						component={HomeScreen}
+						options={{
+							headerLeft: () => <Logo />,
+							headerTitle: "Maya",
+						}}
+					/>
 					<Stack.Screen name="Signup" component={SignupScreen} />
 					<Stack.Screen name="VerifyAccount" component={VerifyAccountScreen} />
 					<Stack.Screen name="Login" component={LoginScreen} />
 				</Stack.Navigator>
-			</SafeAreaView>
+			</View>
 		</NavigationContainer>
 	);
 };

@@ -7,8 +7,6 @@ import { Heading, Para } from "../../components/typography/Typography";
 const HomeScreen: FC = () => {
 	return (
 		<ScrollView>
-			<Header />
-
 			<View className="items-center">
 				<View className="w-auto h-auto mt-10">
 					<Image

@@ -35,9 +35,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 
 	return (
 		<ScrollView automaticallyAdjustKeyboardInsets>
-			<Header />
-
-			<View className="items-center">
+			<View className="items-center mb-6">
 				<View className="w-auto h-auto mt-10">
 					<Image
 						source={require("../../../assets/illustrations/signup.jpg")}

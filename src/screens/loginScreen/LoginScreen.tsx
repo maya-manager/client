@@ -1,5 +1,5 @@
-import { View, ScrollView, Image } from "react-native";
-import React from "react";
+import { View, ScrollView, Image, Modal } from "react-native";
+import React, { FC } from "react";
 import Header from "../../components/header/Header";
 import { Heading, Para } from "../../components/typography/Typography";
 import { Formik } from "formik";
@@ -11,7 +11,7 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { RootState } from "../../store";
 import { postLoginAction } from "../../store/actions/auth.action";
 
-const LoginScreen = () => {
+const LoginScreen: FC = () => {
 	const dispatch = useAppDispatch();
 	const { isLoginLoading } = useAppSelector((state: RootState) => state.auth);
 
@@ -21,9 +21,7 @@ const LoginScreen = () => {
 
 	return (
 		<ScrollView automaticallyAdjustKeyboardInsets>
-			<Header />
-
-			<View className="items-center">
+			<View className="items-center mb-6">
 				<View className="w-auto h-auto mt-10">
 					<Image
 						source={require("../../../assets/illustrations/login.jpg")}
@@ -71,7 +69,13 @@ const LoginScreen = () => {
 								</Button>
 							</View>
 
-							{/* TODO: add forgot password option here */}
+							<View className="flex-row items-center mt-5">
+								<Para>Uhhh! </Para>
+
+								<Button type="link" textClassName="font-semibold">
+									Forgot password
+								</Button>
+							</View>
 
 							<Button
 								rootClassName="mt-5"
@@ -85,6 +89,12 @@ const LoginScreen = () => {
 					)}
 				</Formik>
 			</View>
+
+			{/* <Modal visible>
+				<View>
+					<Heading>Modal</Heading>
+				</View>
+			</Modal> */}
 		</ScrollView>
 	);
 };
