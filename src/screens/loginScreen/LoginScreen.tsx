@@ -1,5 +1,5 @@
-import { View, ScrollView, Image, Modal } from "react-native";
-import React, { FC } from "react";
+import { View, ScrollView, Image, SafeAreaView } from "react-native";
+import React, { FC, useState } from "react";
 import Header from "../../components/header/Header";
 import { Heading, Para } from "../../components/typography/Typography";
 import { Formik } from "formik";
@@ -10,14 +10,19 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { RootState } from "../../store";
 import { postLoginAction } from "../../store/actions/auth.action";
+import Modal from "../../components/modal/Modal";
 
 const LoginScreen: FC = () => {
 	const dispatch = useAppDispatch();
 	const { isLoginLoading } = useAppSelector((state: RootState) => state.auth);
 
+	const [isForgotPasswordModalVisible, setIsForgotPasswordModalVisible] = useState(false);
+
 	const onSubmitHandler = (values: PostLoginSchema) => {
 		dispatch(postLoginAction(values));
 	};
+
+	const onForgotPassword = () => {};
 
 	return (
 		<ScrollView automaticallyAdjustKeyboardInsets>
@@ -62,7 +67,7 @@ const LoginScreen: FC = () => {
 							/>
 
 							<View className="flex-row items-center mt-5">
-								<Para>Already have an account? </Para>
+								<Para>Don't have account? </Para>
 
 								<Button type="link" textClassName="font-semibold" to="Signup">
 									Signup
@@ -72,7 +77,11 @@ const LoginScreen: FC = () => {
 							<View className="flex-row items-center mt-5">
 								<Para>Uhhh! </Para>
 
-								<Button type="link" textClassName="font-semibold">
+								<Button
+									type="link"
+									textClassName="font-semibold"
+									onPress={() => setIsForgotPasswordModalVisible(true)}
+								>
 									Forgot password
 								</Button>
 							</View>
@@ -90,11 +99,27 @@ const LoginScreen: FC = () => {
 				</Formik>
 			</View>
 
-			{/* <Modal visible>
-				<View>
-					<Heading>Modal</Heading>
-				</View>
-			</Modal> */}
+			<Modal
+				isVisible={isForgotPasswordModalVisible}
+				setIsVisible={setIsForgotPasswordModalVisible}
+				heading="Verify your email"
+			>
+				<Formik onSubmit={onForgotPassword} initialValues={{ email: "" }}>
+					{() => (
+						<View className="p-0">
+							<Input
+								label="Email"
+								placeholder="email@example"
+								rootClassName="p-0"
+								inputClassName="w-[80%]"
+							/>
+
+							{/* TODO: add loading state */}
+							<Button rootClassName="mt-5">Verify!</Button>
+						</View>
+					)}
+				</Formik>
+			</Modal>
 		</ScrollView>
 	);
 };

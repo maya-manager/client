@@ -71,7 +71,7 @@ const Input: FC<IInputProps> = ({
 			</Text>
 			<TextInput
 				placeholder={placeholder}
-				className={`mt-3 border-solid border-lightgrey border-[0.2px] w-full rounded-md px-4 h-16 pb-3 pt-2 text-lg ${
+				className={`mt-3 border-solid border-lightgrey border-[0.2px] max-w-full rounded-md px-4 h-16 pb-3 pt-2 text-lg ${
 					error && "border-accent"
 				} ${inputClassName}`}
 				placeholderTextColor={

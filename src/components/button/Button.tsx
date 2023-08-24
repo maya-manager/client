@@ -64,10 +64,14 @@ const Button: FC<ButtonProps> = ({
 		<>
 			{type === "contained" && (
 				<TouchableOpacity
-					className={`py-3 px-16 bg-primary shadow-sm shadow-greyLight rounded-xl flex-row justify-between ${rootClassName}`}
+					className={`py-3 px-16 bg-primary shadow-sm shadow-greyLight rounded-xl flex-row text-center items-center ${
+						loading ? "justify-between" : "justify-center"
+					} ${rootClassName}`}
 					onPress={() => (to ? navigation.navigate(to) : onPress())}
 				>
-					<Text className={`text-white text-lg ${textClassName}`}>
+					<Text
+						className={`text-white text-lg text-center items-center ${textClassName}`}
+					>
 						{loading ? loadingText : children}{" "}
 					</Text>
 					{loading && <ActivityIndicator color="#fff" className="ml-2" />}
@@ -77,7 +81,7 @@ const Button: FC<ButtonProps> = ({
 			{type === "link" && (
 				<TouchableOpacity
 					className="items-center justify-center"
-					onPress={() => to && navigation.navigate(to)}
+					onPress={() => (to ? navigation.navigate(to) : onPress())}
 				>
 					<Text
 						className={`text-primary text-lg underline font-semibold ${textClassName}`}

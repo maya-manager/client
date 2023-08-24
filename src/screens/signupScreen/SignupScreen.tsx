@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { View, ScrollView, Image } from "react-native";
-import Header from "../../components/header/Header";
-import { Heading } from "../../components/typography/Typography";
+import { Heading, Para } from "../../components/typography/Typography";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import { Formik } from "formik";
@@ -118,7 +117,13 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								type="password"
 							/>
 
-							{/* TODO: add already have account line */}
+							<View className="flex-row items-center mt-5">
+								<Para>Already have an account? </Para>
+
+								<Button type="link" textClassName="font-semibold" to="Login">
+									Login
+								</Button>
+							</View>
 
 							<Button
 								rootClassName="mt-5"
