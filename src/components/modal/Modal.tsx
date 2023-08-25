@@ -41,7 +41,12 @@ const Modal: FC<ModalProps> = ({ isVisible, setIsVisible, heading, children }) =
 				className="flex-1"
 				behavior={Platform.OS === "ios" ? "padding" : "height"}
 			>
-				<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+				<ScrollView
+					contentContainerStyle={{ flexGrow: 1 }}
+					onScrollEndDrag={(e) =>
+						e.nativeEvent.contentOffset.y < -100 && setIsVisible(false)
+					}
+				>
 					<View className="h-full flex flex-1 justify-end">
 						<BlurView
 							intensity={100}
