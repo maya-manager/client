@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+	setIsForgotPasswordLoadingReducer,
 	setIsLoginLoadingReducer,
 	setIsResendVerificationCodeLoadingReducer,
 	setIsSignupLoadingReducer,
@@ -11,6 +12,7 @@ export interface AuthState {
 	isVerifyAccountLoading: boolean;
 	isLoginLoading: boolean;
 	isResendVerificationCodeLoading: boolean;
+	isForgotPasswordLoading: boolean;
 }
 
 const initialState: AuthState = {
@@ -18,6 +20,7 @@ const initialState: AuthState = {
 	isVerifyAccountLoading: false,
 	isLoginLoading: false,
 	isResendVerificationCodeLoading: false,
+	isForgotPasswordLoading: false,
 };
 
 const authSlice = createSlice({
@@ -28,6 +31,7 @@ const authSlice = createSlice({
 		setIsVerifyAccountLoading: setIsVerifyAccountLoadingReducer,
 		setIsLoginLoading: setIsLoginLoadingReducer,
 		setIsResendVerificationCodeLoading: setIsResendVerificationCodeLoadingReducer,
+		setIsForgotPasswordLoading: setIsForgotPasswordLoadingReducer,
 	},
 });
 

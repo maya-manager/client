@@ -25,3 +25,9 @@ export const postLoginSchema = Yup.object().shape({
 });
 
 export type PostLoginSchema = Yup.InferType<typeof postLoginSchema>;
+
+export const getForgotPasswordSchema = Yup.object().shape({
+	email: Yup.string().email("Invalid email").required("This is required"),
+});
+
+export type GetForgotPasswordSchema = Yup.InferType<typeof getForgotPasswordSchema>;

@@ -1,7 +1,12 @@
 import api, { APIResponseSuccess } from "../../common/utils/api.util";
 import { authActions } from "../slices/auth.slice";
 import { Dispatch } from "@reduxjs/toolkit";
-import { GetVerifyAccountSchema, PostLoginSchema, PostSignupSchema } from "./schemas/auth.schema";
+import {
+	GetForgotPasswordSchema,
+	GetVerifyAccountSchema,
+	PostLoginSchema,
+	PostSignupSchema,
+} from "./schemas/auth.schema";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const postSignupAction = (payload: PostSignupSchema) => {
@@ -74,6 +79,24 @@ export const postLoginAction = (payload: PostLoginSchema) => {
 			return Promise.reject(err);
 		} finally {
 			dispatch(authActions.setIsLoginLoading(false));
+		}
+	};
+};
+
+export const getForgotPasswordAction = (payload: GetForgotPasswordSchema) => {
+	return async (dispatch: Dispatch) => {
+		try {
+			dispatch(authActions.setIsForgotPasswordLoading(true));
+
+			const response = await api.get<APIResponseSuccess>(
+				`/auth/forgot-password/${payload.email}`,
+			);
+
+			return Promise.resolve(response.data);
+		} catch (err) {
+			return Promise.reject(err);
+		} finally {
+			dispatch(authActions.setIsForgotPasswordLoading(false));
 		}
 	};
 };

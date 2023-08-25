@@ -11,6 +11,7 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { RootState } from "../../store";
 import { postLoginAction } from "../../store/actions/auth.action";
 import Modal from "../../components/modal/Modal";
+import ForgotPasswordModal from "./components/fogotPasswordModal/ForgotPasswordModal";
 
 const LoginScreen: FC = () => {
 	const dispatch = useAppDispatch();
@@ -22,10 +23,8 @@ const LoginScreen: FC = () => {
 		dispatch(postLoginAction(values));
 	};
 
-	const onForgotPassword = () => {};
-
 	return (
-		<ScrollView automaticallyAdjustKeyboardInsets>
+		<ScrollView automaticallyAdjustKeyboardInsets={!isForgotPasswordModalVisible && true}>
 			<View className="items-center mb-6">
 				<View className="w-auto h-auto mt-10">
 					<Image
@@ -53,6 +52,7 @@ const LoginScreen: FC = () => {
 								onBlur={handleBlur("email_username")}
 								value={values.email_username}
 								autoCapitalize="none"
+								keyboardType="email-address"
 							/>
 
 							<Input
@@ -99,27 +99,10 @@ const LoginScreen: FC = () => {
 				</Formik>
 			</View>
 
-			<Modal
-				isVisible={isForgotPasswordModalVisible}
-				setIsVisible={setIsForgotPasswordModalVisible}
-				heading="Verify your email"
-			>
-				<Formik onSubmit={onForgotPassword} initialValues={{ email: "" }}>
-					{() => (
-						<View className="p-0">
-							<Input
-								label="Email"
-								placeholder="email@example"
-								rootClassName="p-0"
-								inputClassName="w-[80%]"
-							/>
-
-							{/* TODO: add loading state */}
-							<Button rootClassName="mt-5">Verify!</Button>
-						</View>
-					)}
-				</Formik>
-			</Modal>
+			<ForgotPasswordModal
+				isForgotPasswordModalVisible={isForgotPasswordModalVisible}
+				setIsForgotPasswordModalVisible={setIsForgotPasswordModalVisible}
+			/>
 		</ScrollView>
 	);
 };

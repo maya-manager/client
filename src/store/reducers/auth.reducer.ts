@@ -22,3 +22,10 @@ export const setIsResendVerificationCodeLoadingReducer = (
 ) => {
 	state.isResendVerificationCodeLoading = action.payload;
 };
+
+export const setIsForgotPasswordLoadingReducer = (
+	state: AuthState,
+	action: PayloadAction<boolean>,
+) => {
+	state.isForgotPasswordLoading = action.payload;
+};
