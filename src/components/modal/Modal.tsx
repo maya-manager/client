@@ -39,23 +39,26 @@ const Modal: FC<ModalProps> = ({ isVisible, setIsVisible, heading, children }) =
 			transparent
 			animationType="slide"
 		>
+			<SafeAreaView />
 			<KeyboardAvoidingView
 				className="flex-1"
 				behavior={Platform.OS === "ios" ? "padding" : "height"}
 			>
 				<ScrollView
-					contentContainerStyle={{ flexGrow: 1 }}
+					contentContainerStyle={{
+						flexGrow: 1,
+					}}
 					onScrollEndDrag={(e) =>
 						e.nativeEvent.contentOffset.y < -100 && setIsVisible(false)
 					}
 				>
-					<Pressable className="flex-1" onPress={() => setIsVisible(false)}>
-						<View className="max-h-[30%] flex flex-1 justify-start"></View>
-					</Pressable>
-					<View className="h-full flex flex-1 justify-end">
+					<View className="flex-1 justify-end h-full justify-self-end">
+						<Pressable className="flex-1" onPress={() => setIsVisible(false)}>
+							<View className="max-h-[20%]"></View>
+						</Pressable>
 						<BlurView
 							intensity={100}
-							className="flex flex-1/2 min-h-[70%] max-h-full items-center justify-center bg-[#eeeeee50] rounded-2xl backdrop-blur-1xl"
+							className="min-h-[70%] max-h-full items-center justify-center rounded-2xl backdrop-blur-3xl"
 						>
 							<View className="p-5 rounded w-[90%]">
 								<Heading rootClassName="mb-5">{heading}</Heading>
