@@ -6,6 +6,8 @@ import {
 	ScrollView,
 	KeyboardAvoidingView,
 	Platform,
+	Pressable,
+	GestureResponderEvent,
 } from "react-native";
 import { Heading } from "../typography/Typography";
 import { BlurView } from "expo-blur";
@@ -47,6 +49,9 @@ const Modal: FC<ModalProps> = ({ isVisible, setIsVisible, heading, children }) =
 						e.nativeEvent.contentOffset.y < -100 && setIsVisible(false)
 					}
 				>
+					<Pressable className="flex-1" onPress={() => setIsVisible(false)}>
+						<View className="max-h-[30%] flex flex-1 justify-start"></View>
+					</Pressable>
 					<View className="h-full flex flex-1 justify-end">
 						<BlurView
 							intensity={100}
