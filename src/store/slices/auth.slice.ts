@@ -3,6 +3,7 @@ import {
 	setIsForgotPasswordLoadingReducer,
 	setIsLoginLoadingReducer,
 	setIsResendVerificationCodeLoadingReducer,
+	setIsResetPasswordLoadingReducer,
 	setIsSignupLoadingReducer,
 	setIsVerifyAccountLoadingReducer,
 } from "../reducers/auth.reducer";
@@ -13,6 +14,7 @@ export interface AuthState {
 	isLoginLoading: boolean;
 	isResendVerificationCodeLoading: boolean;
 	isForgotPasswordLoading: boolean;
+	isResetPasswordLoading: boolean;
 }
 
 const initialState: AuthState = {
@@ -21,6 +23,7 @@ const initialState: AuthState = {
 	isLoginLoading: false,
 	isResendVerificationCodeLoading: false,
 	isForgotPasswordLoading: false,
+	isResetPasswordLoading: false,
 };
 
 const authSlice = createSlice({
@@ -32,6 +35,7 @@ const authSlice = createSlice({
 		setIsLoginLoading: setIsLoginLoadingReducer,
 		setIsResendVerificationCodeLoading: setIsResendVerificationCodeLoadingReducer,
 		setIsForgotPasswordLoading: setIsForgotPasswordLoadingReducer,
+		setIsResetPasswordLoading: setIsResetPasswordLoadingReducer,
 	},
 });
 

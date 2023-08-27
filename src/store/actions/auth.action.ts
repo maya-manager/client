@@ -5,6 +5,7 @@ import {
 	GetForgotPasswordSchema,
 	GetVerifyAccountSchema,
 	PostLoginSchema,
+	PostResetPasswordSchema,
 	PostSignupSchema,
 } from "./schemas/auth.schema";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -97,6 +98,22 @@ export const getForgotPasswordAction = (payload: GetForgotPasswordSchema) => {
 			return Promise.reject(err);
 		} finally {
 			dispatch(authActions.setIsForgotPasswordLoading(false));
+		}
+	};
+};
+
+export const postResetPasswordAction = (email: string, payload: PostResetPasswordSchema) => {
+	return (dispatch: Dispatch) => {
+		try {
+			dispatch(authActions.setIsResetPasswordLoading(true));
+
+			const response = api.post<APIResponseSuccess>(`/auth/reset-password/${email}`, payload);
+
+			return Promise.resolve(response);
+		} catch (err) {
+			return Promise.reject(err);
+		} finally {
+			dispatch(authActions.setIsResetPasswordLoading(false));
 		}
 	};
 };

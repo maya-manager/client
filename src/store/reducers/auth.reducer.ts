@@ -29,3 +29,10 @@ export const setIsForgotPasswordLoadingReducer = (
 ) => {
 	state.isForgotPasswordLoading = action.payload;
 };
+
+export const setIsResetPasswordLoadingReducer = (
+	state: AuthState,
+	action: PayloadAction<boolean>,
+) => {
+	state.isResetPasswordLoading = action.payload;
+};

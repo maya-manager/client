@@ -13,7 +13,10 @@ import {
 import { useAppDispatch } from "../../../../hooks/useAppDispatch";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
 import { RootState } from "../../../../store";
-import { getForgotPasswordAction } from "../../../../store/actions/auth.action";
+import {
+	getForgotPasswordAction,
+	postResetPasswordAction,
+} from "../../../../store/actions/auth.action";
 import { alertActions } from "../../../../store/slices/alert.slice";
 
 interface ForgotPasswordModalProps {
@@ -26,23 +29,39 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({
 	setIsForgotPasswordModalVisible,
 }) => {
 	const dispatch = useAppDispatch();
-	const { isForgotPasswordLoading } = useAppSelector((state: RootState) => state.auth);
+	const { isForgotPasswordLoading, isResetPasswordLoading } = useAppSelector(
+		(state: RootState) => state.auth,
+	);
 
 	const [visibleTab, setVisibleTab] = useState<"forgotPassword" | "resetPassword">(
 		"forgotPassword",
 	);
+	const [email, setEmail] = useState("");
 
 	const onForgotPassword = async (values: GetForgotPasswordSchema) => {
 		try {
 			await dispatch(getForgotPasswordAction(values));
 
+			setEmail(values.email);
 			setVisibleTab("resetPassword");
 		} catch (err: any) {
 			dispatch(alertActions.setAlert({ message: err.message, type: "error" }));
 		}
 	};
 
-	const onResetPassword = async (values: PostResetPasswordSchema) => {};
+	const onResetPassword = async (values: PostResetPasswordSchema) => {
+		try {
+			await dispatch(postResetPasswordAction(email, values));
+
+			dispatch(
+				alertActions.setAlert({ message: "password reset successful", type: "success" }),
+			);
+			setIsForgotPasswordModalVisible(false);
+			setVisibleTab("forgotPassword");
+		} catch (err: any) {
+			dispatch(alertActions.setAlert({ message: err.message, type: "error" }));
+		}
+	};
 
 	return (
 		<Modal
@@ -130,8 +149,8 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({
 							<Button
 								rootClassName="mt-5"
 								onPress={handleSubmit}
-								loading={isForgotPasswordLoading}
-								loadingText="Sending OTP..."
+								loading={isResetPasswordLoading}
+								loadingText="Resetting Password..."
 							>
 								Reset
 							</Button>
