@@ -7,7 +7,6 @@ import {
 	KeyboardAvoidingView,
 	Platform,
 	Pressable,
-	GestureResponderEvent,
 } from "react-native";
 import { Heading } from "../typography/Typography";
 import { BlurView } from "expo-blur";
