@@ -47,7 +47,7 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 		try {
 			await dispatch(getVerifyAccountAction(values));
 
-			navigation.navigate("Login");
+			navigation.navigate("Home");
 		} catch (err: any) {
 			// TODO: don't show direct errors from server instead do error handling in client
 			dispatch(alertActions.setAlert({ type: "error", message: err.message }));

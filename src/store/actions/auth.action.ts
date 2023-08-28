@@ -9,6 +9,9 @@ import {
 	PostSignupSchema,
 } from "./schemas/auth.schema";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import store, { RootState } from "..";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 
 export const postSignupAction = (payload: PostSignupSchema) => {
 	return async (dispatch: Dispatch) => {
@@ -16,6 +19,13 @@ export const postSignupAction = (payload: PostSignupSchema) => {
 			dispatch(authActions.setIsSignupLoading(true));
 
 			const response = await api.post<APIResponseSuccess>("/auth/signup", payload);
+
+			dispatch(
+				authActions.setSignupCredentials({
+					email: payload.email,
+					password: payload.password,
+				}),
+			);
 			return Promise.resolve(response.data);
 		} catch (err: any) {
 			return Promise.reject(err);
@@ -42,6 +52,8 @@ export const getResendVerificationCodeAction = (email: string) => {
 };
 
 export const getVerifyAccountAction = (payload: GetVerifyAccountSchema) => {
+	// can I use useSelector here
+
 	return async (dispatch: Dispatch) => {
 		try {
 			dispatch(authActions.setIsVerifyAccountLoading(true));
@@ -49,6 +61,18 @@ export const getVerifyAccountAction = (payload: GetVerifyAccountSchema) => {
 			const response = await api.get<APIResponseSuccess>(
 				`/auth/verify/${payload.email}?vc=${payload.verification_code}`,
 			);
+
+			// auto login
+			const { signupCredentials } = store.getState().auth;
+
+			if (payload.email === signupCredentials.email) {
+				await store.dispatch(
+					postLoginAction({
+						email_username: signupCredentials.email,
+						password: signupCredentials.password,
+					}),
+				);
+			}
 
 			return Promise.resolve(response.data);
 		} catch (err: any) {

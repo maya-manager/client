@@ -36,3 +36,10 @@ export const setIsResetPasswordLoadingReducer = (
 ) => {
 	state.isResetPasswordLoading = action.payload;
 };
+
+export const setSignupCredentialsReducer = (
+	state: AuthState,
+	action: PayloadAction<{ email: string; password: string }>,
+) => {
+	state.signupCredentials = action.payload;
+};
