@@ -8,7 +8,7 @@ import {
 	Platform,
 	Pressable,
 } from "react-native";
-import { Heading } from "../typography/Typography";
+import { Heading, Para } from "../typography/Typography";
 import { BlurView } from "expo-blur";
 
 interface ModalProps {
@@ -27,10 +27,15 @@ interface ModalProps {
 	 */
 	heading: string;
 
+	/**
+	 * Description that will be shown below heading
+	 */
+	description?: string;
+
 	children: React.ReactNode;
 }
 
-const Modal: FC<ModalProps> = ({ isVisible, setIsVisible, heading, children }) => {
+const Modal: FC<ModalProps> = ({ isVisible, setIsVisible, heading, description, children }) => {
 	return (
 		<ModalComponent
 			visible={isVisible}
@@ -60,7 +65,8 @@ const Modal: FC<ModalProps> = ({ isVisible, setIsVisible, heading, children }) =
 							className="min-h-[70%] max-h-full items-center justify-center rounded-2xl backdrop-blur-3xl"
 						>
 							<View className="p-5 rounded w-[90%]">
-								<Heading rootClassName="mb-5">{heading}</Heading>
+								<Heading rootClassName="mb-8">{heading}</Heading>
+								{description && <Para rootClassName="mb-8">{description}</Para>}
 								<View className="w-full">{children}</View>
 							</View>
 						</BlurView>

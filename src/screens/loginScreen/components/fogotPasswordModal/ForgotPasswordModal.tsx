@@ -64,12 +64,15 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({
 	};
 
 	return (
-		// TODO: add description in modal
-
 		<Modal
 			isVisible={isForgotPasswordModalVisible}
 			setIsVisible={setIsForgotPasswordModalVisible}
 			heading={visibleTab === "forgotPassword" ? "Verify Your Email" : "Select New Password"}
+			description={
+				visibleTab === "forgotPassword"
+					? "An OTP will be sent to your email"
+					: "Please enter the OTP that you received"
+			}
 		>
 			{visibleTab === "forgotPassword" ? (
 				<Formik
