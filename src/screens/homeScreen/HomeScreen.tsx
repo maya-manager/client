@@ -1,10 +1,35 @@
 import { View, Text, Image, ScrollView } from "react-native";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Button from "../../components/button/Button";
 import Header from "../../components/header/Header";
 import { Heading, Para } from "../../components/typography/Typography";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { getHealthCheck } from "../../store/actions/healthCheck.action";
+import { NavigationProp } from "@react-navigation/native";
+import { RootStackParamList } from "../../App";
 
-const HomeScreen: FC = () => {
+interface HomeScreenProps {
+	navigation: NavigationProp<RootStackParamList, "Home">;
+}
+
+const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+	// health check
+	const dispatch = useAppDispatch();
+
+	const healthCheck = async () => {
+		try {
+			await dispatch(getHealthCheck());
+
+			return;
+		} catch (err) {
+			navigation.navigate("ServerUnderMaintenance");
+		}
+	};
+
+	useEffect(() => {
+		healthCheck();
+	}, []);
+
 	return (
 		<ScrollView>
 			<View className="items-center">

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Provider } from "react-redux";
 import { NavigationContainer, Theme, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -10,6 +10,8 @@ import LoginScreen from "./screens/loginScreen/LoginScreen";
 import store from "./store";
 import VerifyAccountScreen from "./screens/verifyOtpScreen/VerifyOtpScreen";
 import { AlertError, AlertSuccess } from "./components/alert/Alert";
+import { useAppDispatch } from "./hooks/useAppDispatch";
+import ServerUnderMaintenance from "./screens/serverUnderMaintenance/ServerUnderMaintenance";
 
 const navigationThemeLight: Theme = {
 	dark: false,
@@ -33,6 +35,7 @@ export type RootStackParamList = {
 	VerifyAccount: {
 		email: string;
 	};
+	ServerUnderMaintenance: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -73,6 +76,15 @@ const Navigation: FC = () => {
 					<Stack.Screen name="Signup" component={SignupScreen} />
 					<Stack.Screen name="VerifyAccount" component={VerifyAccountScreen} />
 					<Stack.Screen name="Login" component={LoginScreen} />
+					<Stack.Screen
+						name="ServerUnderMaintenance"
+						component={ServerUnderMaintenance}
+						options={{
+							headerTitle: "We Are Under Maintenance",
+							headerBackVisible: false,
+							gestureEnabled: false,
+						}}
+					/>
 				</Stack.Navigator>
 			</View>
 		</NavigationContainer>

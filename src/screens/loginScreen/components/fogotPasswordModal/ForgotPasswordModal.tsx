@@ -64,6 +64,8 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({
 	};
 
 	return (
+		// TODO: add description in modal
+
 		<Modal
 			isVisible={isForgotPasswordModalVisible}
 			setIsVisible={setIsForgotPasswordModalVisible}

@@ -9,9 +9,7 @@ import {
 	PostSignupSchema,
 } from "./schemas/auth.schema";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import store, { RootState } from "..";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
+import store from "..";
 
 export const postSignupAction = (payload: PostSignupSchema) => {
 	return async (dispatch: Dispatch) => {

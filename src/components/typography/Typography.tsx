@@ -41,6 +41,8 @@ interface ParaProps extends TextProps {
  */
 export const Para: FC<ParaProps> = ({ children, rootClassName }) => {
 	return (
-		<Text className={`text-lg tracking-widest font-light ${rootClassName}`}>{children}</Text>
+		<Text className={`text-lg text-center tracking-widest font-light ${rootClassName}`}>
+			{children}
+		</Text>
 	);
 };

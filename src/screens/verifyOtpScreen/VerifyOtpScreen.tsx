@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import { ActivityIndicator, Image, ScrollView, TouchableOpacity, View } from "react-native";
-import Header from "../../components/header/Header";
 import { Heading, Para } from "../../components/typography/Typography";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
