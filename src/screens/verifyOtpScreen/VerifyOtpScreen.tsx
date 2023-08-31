@@ -56,7 +56,6 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 	const onResendOtpHandler = async () => {
 		try {
 			await dispatch(getResendVerificationCodeAction(email));
-			dispatch(alertActions.setAlert({ type: "success", message: "OTP sent successfully" }));
 		} catch (err: any) {
 			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
 		} finally {
@@ -101,21 +100,16 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 
 							<View className="mt-5">
 								{resendOtpCounter ? (
-									<Para rootClassName="text-greyLight">
-										Resend OTP in {resendOtpCounter}s
-									</Para>
+									<Para>Resend OTP in {resendOtpCounter}s</Para>
 								) : (
-									<TouchableOpacity onPress={onResendOtpHandler}>
-										<Para
-											rootClassName="underline text-accent"
-											onPress={onResendOtpHandler}
-										>
-											Resend OTP{" "}
-											{isResendVerificationCodeLoading && (
-												<ActivityIndicator color="#FF6364" />
-											)}
-										</Para>
-									</TouchableOpacity>
+									<Button
+										onPress={onResendOtpHandler}
+										loading={isResendVerificationCodeLoading}
+										loadingText="Sending..."
+										type="link"
+									>
+										Resend OTP
+									</Button>
 								)}
 							</View>
 

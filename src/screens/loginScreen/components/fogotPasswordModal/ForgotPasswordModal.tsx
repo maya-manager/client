@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Modal from "../../../../components/modal/Modal";
 import { Formik } from "formik";
 import { View } from "react-native";
@@ -18,6 +18,7 @@ import {
 	postResetPasswordAction,
 } from "../../../../store/actions/auth.action";
 import { alertActions } from "../../../../store/slices/alert.slice";
+import { Para } from "../../../../components/typography/Typography";
 
 interface ForgotPasswordModalProps {
 	isForgotPasswordModalVisible: boolean;
@@ -37,6 +38,15 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({
 		"forgotPassword",
 	);
 	const [email, setEmail] = useState("");
+	const [resendOtpCounter, setResendOtpCounter] = useState(30);
+
+	useEffect(() => {
+		if (resendOtpCounter > 0) {
+			setTimeout(() => {
+				setResendOtpCounter((prev) => prev - 1);
+			}, 1000);
+		}
+	}, [resendOtpCounter]);
 
 	const onForgotPassword = async (values: GetForgotPasswordSchema) => {
 		try {
@@ -60,6 +70,16 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({
 			setVisibleTab("forgotPassword");
 		} catch (err: any) {
 			dispatch(alertActions.setAlert({ message: err.message, type: "error" }));
+		}
+	};
+
+	const onResendVerificationCode = async () => {
+		try {
+			await dispatch(getForgotPasswordAction({ email }));
+		} catch (err: any) {
+			dispatch(alertActions.setAlert({ message: err.message, type: "error" }));
+		} finally {
+			setResendOtpCounter(30);
 		}
 	};
 
@@ -151,8 +171,23 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({
 								value={values.cpassword}
 							/>
 
+							<View className="mt-8 items-center">
+								{resendOtpCounter ? (
+									<Para>Resend OTP in {resendOtpCounter}s</Para>
+								) : (
+									<Button
+										type="link"
+										onPress={onResendVerificationCode}
+										loading={isForgotPasswordLoading}
+										loadingText="Sending..."
+									>
+										Resend OTP
+									</Button>
+								)}
+							</View>
+
 							<Button
-								rootClassName="mt-5"
+								rootClassName="my-8"
 								onPress={handleSubmit}
 								loading={isResetPasswordLoading}
 								loadingText="Resetting Password..."

@@ -80,14 +80,18 @@ const Button: FC<ButtonProps> = ({
 
 			{type === "link" && (
 				<TouchableOpacity
-					className="items-center justify-center"
+					className={`items-center flex-row ${
+						loading ? "justify-between" : "justify-center"
+					}`}
 					onPress={() => (to ? navigation.navigate(to) : onPress())}
 				>
 					<Text
 						className={`text-primary text-lg underline font-semibold ${textClassName}`}
 					>
-						{children}
+						{loading ? loadingText : children}
 					</Text>
+
+					{loading && <ActivityIndicator color="#56BAA7" className="ml-2" />}
 				</TouchableOpacity>
 			)}
 		</>
