@@ -8,10 +8,10 @@ const config: ExpoConfig = {
 	slug: "maya",
 	version: "1.0.0",
 	orientation: "portrait",
-	icon: "./assets/icon.png",
+	icon: "./assets/logos/icon.png",
 	userInterfaceStyle: "light",
 	splash: {
-		image: "./assets/splash.png",
+		image: "./assets/logos/full.png",
 		resizeMode: "contain",
 		backgroundColor: "#ffffff",
 	},
@@ -22,7 +22,7 @@ const config: ExpoConfig = {
 	},
 	android: {
 		adaptiveIcon: {
-			foregroundImage: "./assets/adaptive-icon.png",
+			foregroundImage: "./assets/logos/icon.png",
 			backgroundColor: "#FFFFFF",
 		},
 	},
