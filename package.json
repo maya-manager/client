@@ -40,7 +40,7 @@
 		"@babel/core": "^7.22.11",
 		"@babel/runtime": "^7.22.6",
 		"@commitlint/cli": "^17.6.6",
-		"@commitlint/config-conventional": "^17.6.6",
+		"@commitlint/config-conventional": "^17.7.0",
 		"@types/axios": "^0.14.0",
 		"@types/react": "~18.2.21",
 		"@typescript-eslint/eslint-plugin": "5.62.0",
