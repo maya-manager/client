@@ -1,15 +1,14 @@
 import { View, Text, Image, ScrollView } from "react-native";
 import React, { FC, useEffect } from "react";
-import Button from "../../components/button/Button";
-import Header from "../../components/header/Header";
-import { Heading, Para } from "../../components/typography/Typography";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { getHealthCheck } from "../../store/actions/healthCheck.action";
+import Button from "../../../components/button/Button";
+import { Heading, Para } from "../../../components/typography/Typography";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { getHealthCheck } from "../../../store/actions/healthCheck.action";
 import { NavigationProp } from "@react-navigation/native";
-import { RootStackParamList } from "../../App";
+import { RootStackParamList } from "../../../App";
 
 interface HomeScreenProps {
-	navigation: NavigationProp<RootStackParamList, "Home">;
+	navigation: NavigationProp<RootStackParamList, "Welcome">;
 }
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
@@ -35,7 +34,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 			<View className="items-center">
 				<View className="w-auto h-auto mt-10">
 					<Image
-						source={require("../../../assets/illustrations/get-started.jpg")}
+						source={require("../../../../assets/illustrations/get-started.jpg")}
 						className="w-[80vw] h-[80vw]"
 					/>
 				</View>

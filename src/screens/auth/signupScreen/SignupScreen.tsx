@@ -1,17 +1,17 @@
 import { FC } from "react";
 import { View, ScrollView, Image } from "react-native";
-import { Heading, Para } from "../../components/typography/Typography";
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
+import { Heading, Para } from "../../../components/typography/Typography";
+import Input from "../../../components/input/Input";
+import Button from "../../../components/button/Button";
 import { Formik } from "formik";
-import { PostSignupSchema, postSignupSchema } from "../../store/actions/schemas/auth.schema";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { alertActions } from "../../store/slices/alert.slice";
+import { PostSignupSchema, postSignupSchema } from "../../../store/actions/schemas/auth.schema";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { alertActions } from "../../../store/slices/alert.slice";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../App";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { RootState } from "../../store";
-import { postSignupAction } from "../../store/actions/auth.action";
+import { RootStackParamList } from "../../../App";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { RootState } from "../../../store";
+import { postSignupAction } from "../../../store/actions/auth.action";
 
 type SignupScreenProps = NativeStackScreenProps<RootStackParamList, "Signup">;
 
@@ -37,7 +37,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 			<View className="items-center mb-6">
 				<View className="w-auto h-auto mt-10">
 					<Image
-						source={require("../../../assets/illustrations/signup.jpg")}
+						source={require("../../../../assets/illustrations/signup.jpg")}
 						className="w-[80vw] h-[80vw]"
 					/>
 				</View>

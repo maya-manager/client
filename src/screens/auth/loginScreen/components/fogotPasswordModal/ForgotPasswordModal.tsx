@@ -1,24 +1,24 @@
 import { FC, useEffect, useState } from "react";
-import Modal from "../../../../components/modal/Modal";
+import Modal from "../../../../../components/modal/Modal";
 import { Formik } from "formik";
 import { View } from "react-native";
-import Input from "../../../../components/input/Input";
-import Button from "../../../../components/button/Button";
+import Input from "../../../../../components/input/Input";
+import Button from "../../../../../components/button/Button";
 import {
 	GetForgotPasswordSchema,
 	PostResetPasswordSchema,
 	getForgotPasswordSchema,
 	postResetPasswordSchema,
-} from "../../../../store/actions/schemas/auth.schema";
-import { useAppDispatch } from "../../../../hooks/useAppDispatch";
-import { useAppSelector } from "../../../../hooks/useAppSelector";
-import { RootState } from "../../../../store";
+} from "../../../../../store/actions/schemas/auth.schema";
+import { useAppDispatch } from "../../../../../hooks/useAppDispatch";
+import { useAppSelector } from "../../../../../hooks/useAppSelector";
+import { RootState } from "../../../../../store";
 import {
 	getForgotPasswordAction,
 	postResetPasswordAction,
-} from "../../../../store/actions/auth.action";
-import { alertActions } from "../../../../store/slices/alert.slice";
-import { Para } from "../../../../components/typography/Typography";
+} from "../../../../../store/actions/auth.action";
+import { alertActions } from "../../../../../store/slices/alert.slice";
+import { Para } from "../../../../../components/typography/Typography";
 
 interface ForgotPasswordModalProps {
 	isForgotPasswordModalVisible: boolean;

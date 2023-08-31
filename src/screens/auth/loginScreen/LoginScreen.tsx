@@ -1,16 +1,14 @@
 import { View, ScrollView, Image, SafeAreaView } from "react-native";
 import React, { FC, useState } from "react";
-import Header from "../../components/header/Header";
-import { Heading, Para } from "../../components/typography/Typography";
+import { Heading, Para } from "../../../components/typography/Typography";
 import { Formik } from "formik";
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
-import { PostLoginSchema, postLoginSchema } from "../../store/actions/schemas/auth.schema";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { RootState } from "../../store";
-import { postLoginAction } from "../../store/actions/auth.action";
-import Modal from "../../components/modal/Modal";
+import Input from "../../../components/input/Input";
+import Button from "../../../components/button/Button";
+import { PostLoginSchema, postLoginSchema } from "../../../store/actions/schemas/auth.schema";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { RootState } from "../../../store";
+import { postLoginAction } from "../../../store/actions/auth.action";
 import ForgotPasswordModal from "./components/fogotPasswordModal/ForgotPasswordModal";
 
 const LoginScreen: FC = () => {
@@ -28,7 +26,7 @@ const LoginScreen: FC = () => {
 			<View className="items-center mb-6">
 				<View className="w-auto h-auto mt-10">
 					<Image
-						source={require("../../../assets/illustrations/login.jpg")}
+						source={require("../../../../assets/illustrations/login.jpg")}
 						className="w-[80vw] h-[80vw]"
 					/>
 				</View>

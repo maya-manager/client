@@ -1,23 +1,23 @@
 import { FC, useEffect, useState } from "react";
 import { ActivityIndicator, Image, ScrollView, TouchableOpacity, View } from "react-native";
-import { Heading, Para } from "../../components/typography/Typography";
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
+import { Heading, Para } from "../../../components/typography/Typography";
+import Input from "../../../components/input/Input";
+import Button from "../../../components/button/Button";
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { RootStackParamList } from "../../App";
+import { RootStackParamList } from "../../../App";
 import { Formik } from "formik";
 import {
 	GetVerifyAccountSchema,
 	getVerifyAccountSchema,
-} from "../../store/actions/schemas/auth.schema";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { RootState } from "../../store";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
+} from "../../../store/actions/schemas/auth.schema";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { RootState } from "../../../store";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import {
 	getVerifyAccountAction,
 	getResendVerificationCodeAction,
-} from "../../store/actions/auth.action";
-import { alertActions } from "../../store/slices/alert.slice";
+} from "../../../store/actions/auth.action";
+import { alertActions } from "../../../store/slices/alert.slice";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type VerifyAccountScreenProps = NativeStackScreenProps<RootStackParamList, "VerifyAccount">;
@@ -46,7 +46,7 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 		try {
 			await dispatch(getVerifyAccountAction(values));
 
-			navigation.navigate("Home");
+			navigation.navigate("Welcome");
 		} catch (err: any) {
 			// TODO: don't show direct errors from server instead do error handling in client
 			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
@@ -68,7 +68,7 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 			<View className="items-center mb-6">
 				<View className="w-auto h-auto mt-10">
 					<Image
-						source={require("../../../assets/illustrations/verify-account.jpg")}
+						source={require("../../../../assets/illustrations/verify-account.jpg")}
 						className="w-[80vw] h-[80vw]"
 					/>
 				</View>

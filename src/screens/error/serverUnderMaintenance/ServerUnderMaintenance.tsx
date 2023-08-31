@@ -1,11 +1,11 @@
 import { NavigationProp } from "@react-navigation/native";
 import { FC } from "react";
 import { Image, Text, View } from "react-native";
-import { RootStackParamList } from "../../App";
-import { Heading, Para } from "../../components/typography/Typography";
-import Button from "../../components/button/Button";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { getHealthCheck } from "../../store/actions/healthCheck.action";
+import { RootStackParamList } from "../../../App";
+import { Heading, Para } from "../../../components/typography/Typography";
+import Button from "../../../components/button/Button";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { getHealthCheck } from "../../../store/actions/healthCheck.action";
 
 interface ServerUnderMaintenanceProps {
 	navigation: NavigationProp<RootStackParamList>;
@@ -18,7 +18,7 @@ const ServerUnderMaintenance: FC<ServerUnderMaintenanceProps> = ({ navigation })
 		try {
 			await dispatch(getHealthCheck());
 
-			navigation.navigate("Home");
+			navigation.navigate("Welcome");
 		} catch (err) {
 			return;
 		}
@@ -28,7 +28,7 @@ const ServerUnderMaintenance: FC<ServerUnderMaintenanceProps> = ({ navigation })
 		<View className="items-center">
 			<View className="w-auto h-auto mt-10">
 				<Image
-					source={require("../../../assets/illustrations/maintenance.jpg")}
+					source={require("../../../../assets/illustrations/maintenance.jpg")}
 					className="w-[80vw] h-[80vw]"
 				/>
 			</View>

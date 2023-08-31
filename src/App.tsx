@@ -1,16 +1,16 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { FC, useCallback } from "react";
 import { Provider } from "react-redux";
-import { NavigationContainer, Theme, useNavigation } from "@react-navigation/native";
+import { NavigationContainer, Theme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Image, SafeAreaView, View } from "react-native";
 import constants from "./common/constants";
-import HomeScreen from "./screens/homeScreen/HomeScreen";
-import SignupScreen from "./screens/signupScreen/SignupScreen";
-import LoginScreen from "./screens/loginScreen/LoginScreen";
+import HomeScreen from "./screens/auth/welcomeScreen/WelcomeScreen";
+import SignupScreen from "./screens/auth/signupScreen/SignupScreen";
+import LoginScreen from "./screens/auth/loginScreen/LoginScreen";
 import store from "./store";
-import VerifyAccountScreen from "./screens/verifyOtpScreen/VerifyOtpScreen";
+import VerifyAccountScreen from "./screens/auth/verifyOtpScreen/VerifyOtpScreen";
 import { AlertError, AlertSuccess } from "./components/alert/Alert";
-import ServerUnderMaintenance from "./screens/serverUnderMaintenance/ServerUnderMaintenance";
+import ServerUnderMaintenance from "./screens/error/serverUnderMaintenance/ServerUnderMaintenance";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 
@@ -30,7 +30,7 @@ const navigationThemeLight: Theme = {
  * Param list for RootStack navigation
  */
 export type RootStackParamList = {
-	Home: undefined;
+	Welcome: undefined;
 	Login: undefined;
 	Signup: undefined;
 	VerifyAccount: {
@@ -40,7 +40,7 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-export const initialRouteName: keyof RootStackParamList = "Home";
+export const initialRouteName: keyof RootStackParamList = "Welcome";
 
 const Logo: FC = () => {
 	return (
@@ -86,7 +86,7 @@ const Navigation: FC = () => {
 					}}
 				>
 					<Stack.Screen
-						name="Home"
+						name="Welcome"
 						component={HomeScreen}
 						options={{
 							headerLeft: () => <Logo />,
