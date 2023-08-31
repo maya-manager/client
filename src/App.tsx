@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import { Provider } from "react-redux";
 import { NavigationContainer, Theme, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -10,8 +10,9 @@ import LoginScreen from "./screens/loginScreen/LoginScreen";
 import store from "./store";
 import VerifyAccountScreen from "./screens/verifyOtpScreen/VerifyOtpScreen";
 import { AlertError, AlertSuccess } from "./components/alert/Alert";
-import { useAppDispatch } from "./hooks/useAppDispatch";
 import ServerUnderMaintenance from "./screens/serverUnderMaintenance/ServerUnderMaintenance";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
 
 const navigationThemeLight: Theme = {
 	dark: false,
@@ -51,11 +52,30 @@ const Logo: FC = () => {
 };
 
 const Navigation: FC = () => {
+	SplashScreen.preventAutoHideAsync();
+
+	const [isLoaded] = useFonts({
+		motserratReg: require("../assets/fonts/Montserrat/Montserrat-Regular.ttf"),
+		motserratBold: require("../assets/fonts/Montserrat/Montserrat-Bold.ttf"),
+		motserratLight: require("../assets/fonts/Montserrat/Montserrat-Light.ttf"),
+		motserratSemiBold: require("../assets/fonts/Montserrat/Montserrat-SemiBold.ttf"),
+	});
+
+	const handleOnLayout = useCallback(async () => {
+		if (isLoaded) {
+			await SplashScreen.hideAsync(); //hide the splashscreen
+		}
+	}, [isLoaded]);
+
+	if (!isLoaded) {
+		return null;
+	}
+
 	return (
 		<NavigationContainer theme={navigationThemeLight}>
 			<SafeAreaView className="flex-0" />
 
-			<View className="flex-1">
+			<View className="flex-1 font-motserratReg" onLayout={handleOnLayout}>
 				<AlertError />
 				<AlertSuccess />
 

@@ -18,7 +18,9 @@ interface HeadingProps extends TextProps {
  */
 export const Heading: FC<HeadingProps> = ({ children, rootClassName }) => {
 	return (
-		<Text className={`text-lightgrey text-center font-semibold text-2xl ${rootClassName}`}>
+		<Text
+			className={`text-lightgrey text-center text-grey font-semibold text-2xl font-motserratSemiBold ${rootClassName}`}
+		>
 			{children}
 		</Text>
 	);
@@ -41,7 +43,9 @@ interface ParaProps extends TextProps {
  */
 export const Para: FC<ParaProps> = ({ children, rootClassName }) => {
 	return (
-		<Text className={`text-lg text-center tracking-widest font-light ${rootClassName}`}>
+		<Text
+			className={`text-lg text-center tracking-widest font-light font-font-motserratLight ${rootClassName}`}
+		>
 			{children}
 		</Text>
 	);

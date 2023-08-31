@@ -10,7 +10,10 @@ module.exports = {
 				accent: "#FF6364",
 			},
 			fontFamily: {
-				motserrat: ["Montserrat", "sans"],
+				motserratReg: "motserratReg",
+				motserratBold: "motserratBold",
+				motserratLight: "motserratLight",
+				motserratSemiBold: "motserratSemiBold",
 			},
 		},
 	},

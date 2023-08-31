@@ -64,7 +64,7 @@ const Button: FC<ButtonProps> = ({
 		<>
 			{type === "contained" && (
 				<TouchableOpacity
-					className={`py-3 px-16 bg-primary shadow-sm shadow-greyLight rounded-xl flex-row text-center items-center ${
+					className={`py-3 px-16 bg-primary shadow-sm shadow-greyLight rounded-xl flex-row text-center items-center font-motserratReg ${
 						loading ? "justify-between" : "justify-center"
 					} ${rootClassName}`}
 					onPress={() => (to ? navigation.navigate(to) : onPress())}
@@ -80,7 +80,7 @@ const Button: FC<ButtonProps> = ({
 
 			{type === "link" && (
 				<TouchableOpacity
-					className={`items-center flex-row ${
+					className={`items-center flex-row font-motserratReg ${
 						loading ? "justify-between" : "justify-center"
 					}`}
 					onPress={() => (to ? navigation.navigate(to) : onPress())}

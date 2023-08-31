@@ -41,8 +41,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 				</View>
 				<View className="px-8">
 					<Heading rootClassName="mt-8">
-						Easily manage your money {"\n"}with{" "}
-						<Text className="text-primary">Maya</Text>
+						Easily manage your money with <Text className="text-primary">Maya</Text>
 					</Heading>
 
 					<Para rootClassName="mt-8">
@@ -54,7 +53,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 					Join Us
 				</Button>
 
-				<View className="mt-8 flex-row items-center">
+				<View className="my-8 flex-row items-center">
 					<Para>Or </Para>
 					<Button to="Login" type="link">
 						login{" "}
