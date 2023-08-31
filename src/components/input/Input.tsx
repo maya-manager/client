@@ -37,13 +37,6 @@ interface IInputProps extends TextInputProps {
 	 * If the input is required. this will only show `*` in the label
 	 */
 	required?: boolean;
-
-	/**
-	 * Type of the input
-	 *
-	 * @default "text"
-	 */
-	type?: "text" | "password";
 }
 
 /**
@@ -62,7 +55,8 @@ const Input: FC<IInputProps> = ({
 	required,
 	autoCapitalize,
 	keyboardType = "default",
-	type = "text",
+	textContentType,
+	secureTextEntry,
 }) => {
 	return (
 		<View className={`w-[100vw] px-8 ${rootClassName}`}>
@@ -83,7 +77,8 @@ const Input: FC<IInputProps> = ({
 				autoCapitalize={autoCapitalize}
 				keyboardType={keyboardType}
 				textAlignVertical="center"
-				secureTextEntry={type === "password"}
+				textContentType={textContentType}
+				secureTextEntry={secureTextEntry}
 			/>
 			{error && <Text className="text-accent mt-2">{error}</Text>}
 		</View>

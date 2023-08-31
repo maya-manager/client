@@ -68,6 +68,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								onBlur={handleBlur("name")}
 								value={values.name}
 								required
+								textContentType="name"
 							/>
 							<Input
 								label="Username"
@@ -79,6 +80,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								value={values.username}
 								required
 								autoCapitalize="none"
+								textContentType="username"
 							/>
 							<Input
 								label="Email"
@@ -91,6 +93,7 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								required
 								autoCapitalize="none"
 								keyboardType="email-address"
+								textContentType="emailAddress"
 							/>
 							<Input
 								label="Password"
@@ -102,7 +105,8 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								value={values.password}
 								required
 								autoCapitalize="none"
-								type="password"
+								textContentType="password"
+								secureTextEntry
 							/>
 							<Input
 								label="Confirm Password"
@@ -114,7 +118,8 @@ const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 								value={values.cpassword}
 								required
 								autoCapitalize="none"
-								type="password"
+								textContentType="password"
+								secureTextEntry
 							/>
 
 							<View className="flex-row items-center mt-5">

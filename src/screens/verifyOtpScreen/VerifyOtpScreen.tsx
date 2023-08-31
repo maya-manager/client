@@ -96,6 +96,7 @@ const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
 								onBlur={handleBlur("name")}
 								value={values.verification_code}
 								required
+								textContentType="oneTimeCode"
 							/>
 
 							<View className="mt-5">

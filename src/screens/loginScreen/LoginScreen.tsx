@@ -53,6 +53,7 @@ const LoginScreen: FC = () => {
 								value={values.email_username}
 								autoCapitalize="none"
 								keyboardType="email-address"
+								textContentType="emailAddress"
 							/>
 
 							<Input
@@ -63,7 +64,8 @@ const LoginScreen: FC = () => {
 								error={errors.password}
 								value={values.password}
 								autoCapitalize="none"
-								type="password"
+								textContentType="password"
+								secureTextEntry
 							/>
 
 							<View className="flex-row items-center mt-5">
