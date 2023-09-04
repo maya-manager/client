@@ -1,4 +1,4 @@
-import { View, ScrollView, Image, SafeAreaView } from "react-native";
+import { View, ScrollView, Image } from "react-native";
 import React, { FC, useState } from "react";
 import { Heading, Para } from "../../../components/typography/Typography";
 import { Formik } from "formik";
@@ -10,19 +10,30 @@ import { useAppSelector } from "../../../hooks/useAppSelector";
 import { RootState } from "../../../store";
 import { postLoginAction } from "../../../store/actions/auth.action";
 import ForgotPasswordModal from "./components/fogotPasswordModal/ForgotPasswordModal";
+import { alertActions } from "../../../store/slices/alert.slice";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { AuthStackParamList } from "../../../navigation/AuthStack";
 
-const LoginScreen: FC = () => {
+type LoginScreenProps = NativeStackScreenProps<AuthStackParamList, "Login">;
+
+const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
 	const dispatch = useAppDispatch();
 	const { isLoginLoading } = useAppSelector((state: RootState) => state.auth);
 
 	const [isForgotPasswordModalVisible, setIsForgotPasswordModalVisible] = useState(false);
 
-	const onSubmitHandler = (values: PostLoginSchema) => {
-		dispatch(postLoginAction(values));
+	const onSubmitHandler = async (values: PostLoginSchema) => {
+		try {
+			await dispatch(postLoginAction(values));
+
+			navigation.navigate("BottomTabs");
+		} catch (err: any) {
+			dispatch(alertActions.setAlert({ type: "error", message: err.message }));
+		}
 	};
 
 	return (
-		<ScrollView automaticallyAdjustKeyboardInsets={!isForgotPasswordModalVisible && true}>
+		<ScrollView automaticallyAdjustKeyboardInsets={!isForgotPasswordModalVisible}>
 			<View className="items-center mb-6">
 				<View className="w-auto h-auto mt-10">
 					<Image
@@ -67,7 +78,7 @@ const LoginScreen: FC = () => {
 							/>
 
 							<View className="flex-row items-center mt-5">
-								<Para>Don't have account? </Para>
+								<Para>Don&lsquo;t have account? </Para>
 
 								<Button type="link" textClassName="font-semibold" to="Signup">
 									Signup

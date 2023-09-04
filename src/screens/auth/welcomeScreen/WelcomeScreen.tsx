@@ -5,10 +5,10 @@ import { Heading, Para } from "../../../components/typography/Typography";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { getHealthCheck } from "../../../store/actions/healthCheck.action";
 import { NavigationProp } from "@react-navigation/native";
-import { RootStackParamList } from "../../../App";
+import { AuthStackParamList } from "../../../App";
 
 interface HomeScreenProps {
-	navigation: NavigationProp<RootStackParamList, "Welcome">;
+	navigation: NavigationProp<AuthStackParamList, "Welcome">;
 }
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {

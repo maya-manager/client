@@ -4,7 +4,7 @@ import { Heading, Para } from "../../../components/typography/Typography";
 import Input from "../../../components/input/Input";
 import Button from "../../../components/button/Button";
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { RootStackParamList } from "../../../App";
+import { AuthStackParamList } from "../../../App";
 import { Formik } from "formik";
 import {
 	GetVerifyAccountSchema,
@@ -20,10 +20,10 @@ import {
 import { alertActions } from "../../../store/slices/alert.slice";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-type VerifyAccountScreenProps = NativeStackScreenProps<RootStackParamList, "VerifyAccount">;
+type VerifyAccountScreenProps = NativeStackScreenProps<AuthStackParamList, "VerifyAccount">;
 
 const VerifyAccountScreen: FC<VerifyAccountScreenProps> = ({ navigation }) => {
-	const route = useRoute<RouteProp<RootStackParamList, "VerifyAccount">>();
+	const route = useRoute<RouteProp<AuthStackParamList, "VerifyAccount">>();
 	const { email } = route.params;
 
 	const dispatch = useAppDispatch();
