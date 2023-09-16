@@ -30,7 +30,7 @@
 		"expo-font": "~11.4.0",
 		"expo-splash-screen": "~0.18.2",
 		"expo-status-bar": "~1.4.4",
-		"formik": "^2.4.2",
+		"formik": "^2.4.4",
 		"nativewind": "^2.0.11",
 		"react": "18.2.0",
 		"react-native": "0.71.8",
@@ -41,7 +41,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.22.11",
-		"@babel/runtime": "^7.22.6",
+		"@babel/runtime": "^7.22.15",
 		"@commitlint/cli": "^17.6.6",
 		"@commitlint/config-conventional": "^17.7.0",
 		"@types/axios": "^0.14.0",
