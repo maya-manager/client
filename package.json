@@ -41,7 +41,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.22.11",
-		"@babel/runtime": "^7.22.6",
+		"@babel/runtime": "^7.22.15",
 		"@commitlint/cli": "^17.6.6",
 		"@commitlint/config-conventional": "^17.7.0",
 		"@types/axios": "^0.14.0",
