@@ -1,11 +1,14 @@
 import { FC } from "react";
-import { Image, Text, View } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
+import { Hero } from "./components/hero/Hero";
 
 const Home: FC = () => {
 	return (
-		<View>
-			<Text>Home</Text>
-		</View>
+		<>
+			<StatusBar backgroundColor="#56BAA770" />
+			<SafeAreaView className="bg-[#56BAA770] flex-grow-0" />
+			<Hero />
+		</>
 	);
 };
 

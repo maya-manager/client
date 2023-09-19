@@ -35,8 +35,8 @@ export const AlertError: FC = () => {
 			style={{ top: constants.statusBarHeight }}
 		>
 			<View className="flex-row justify-between items-center w-[80%] px-4 py-2 shadow shadow-black/30 bg-white">
-				<View className="border-[1px] border-solid border-accent rounded-full mr-2 h-5 w-5 items-center justify-center">
-					<Text className="text-accent">!</Text>
+				<View className="border-[1px] border-solid border-danger rounded-full mr-2 h-5 w-5 items-center justify-center">
+					<Text className="text-danger">!</Text>
 				</View>
 				<Text className="w-[60%]">{message}</Text>
 				<Pressable onPress={hideAlert}>
