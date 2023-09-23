@@ -38,6 +38,11 @@ const Navigation: FC = () => {
 		motserratBold: require("../assets/fonts/Montserrat/Montserrat-Bold.ttf"),
 		motserratLight: require("../assets/fonts/Montserrat/Montserrat-Light.ttf"),
 		motserratSemiBold: require("../assets/fonts/Montserrat/Montserrat-SemiBold.ttf"),
+		oswaldReg: require("../assets/fonts/Oswald/Oswald-Regular.ttf"),
+		oswaldLight: require("../assets/fonts/Oswald/Oswald-Light.ttf"),
+		oswaldBold: require("../assets/fonts/Oswald/Oswald-Bold.ttf"),
+		oswaldSemiBold: require("../assets/fonts/Oswald/Oswald-SemiBold.ttf"),
+		oswaldMedium: require("../assets/fonts/Oswald/Oswald-Medium.ttf"),
 	});
 
 	const handleOnLayout = useCallback(async () => {
@@ -52,8 +57,6 @@ const Navigation: FC = () => {
 
 	return (
 		<NavigationContainer theme={navigationThemeLight}>
-			<SafeAreaView className="flex-0" />
-
 			<View className="flex-1 font-motserratReg" onLayout={handleOnLayout}>
 				<AlertError />
 				<AlertSuccess />

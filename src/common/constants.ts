@@ -3,11 +3,12 @@ import Constants from "expo-constants";
 
 const constants = {
 	colors: {
+		success: "#52C41A",
 		primary: "#56BAA7",
 		white: "#fff",
 		grey: "#565656",
 		placeholders: "#868686",
-		accent: "#FF6364",
+		danger: "#FF6364",
 	},
 	environment: {
 		API_URL: API_URL,

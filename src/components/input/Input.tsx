@@ -60,16 +60,16 @@ const Input: FC<IInputProps> = ({
 }) => {
 	return (
 		<View className={`w-[100vw] px-8 ${rootClassName}`}>
-			<Text className={`${error && "text-accent"} ${labelClassName}`}>
+			<Text className={`${error && "text-danger"} ${labelClassName}`}>
 				{label}: {required && "*"}
 			</Text>
 			<TextInput
 				placeholder={placeholder}
 				className={`mt-3 border-solid border-lightgrey border-[0.2px] max-w-full rounded-md px-4 h-16 pb-3 pt-2 text-lg ${
-					error && "border-accent"
+					error && "border-danger"
 				} ${inputClassName}`}
 				placeholderTextColor={
-					error ? constants.colors.accent : constants.colors.placeholders
+					error ? constants.colors.danger : constants.colors.placeholders
 				}
 				onChangeText={onChangeText}
 				onBlur={onBlur}
@@ -80,7 +80,7 @@ const Input: FC<IInputProps> = ({
 				textContentType={textContentType}
 				secureTextEntry={secureTextEntry}
 			/>
-			{error && <Text className="text-accent mt-2">{error}</Text>}
+			{error && <Text className="text-danger mt-2">{error}</Text>}
 		</View>
 	);
 };
