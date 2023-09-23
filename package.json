@@ -26,7 +26,7 @@
 		"axios": "^1.5.0",
 		"expo": "^48.0.20",
 		"expo-blur": "~12.4.1",
-		"expo-constants": "~14.2.1",
+		"expo-constants": "~14.4.2",
 		"expo-splash-screen": "~0.18.2",
 		"expo-status-bar": "~1.4.4",
 		"formik": "^2.4.4",
