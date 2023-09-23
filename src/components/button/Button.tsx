@@ -1,14 +1,14 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { FC } from "react";
 import { ActivityIndicator, Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
-import { RootStackParamList } from "../../App";
+import { AuthStackParamList } from "../../App";
 
 interface ButtonProps extends TouchableOpacityProps {
 	/**
 	 * The screen to navigate to
 	 */
 
-	to?: keyof RootStackParamList;
+	to?: keyof AuthStackParamList;
 
 	/**
 	 * The type of button
@@ -59,7 +59,7 @@ const Button: FC<ButtonProps> = ({
 	loadingText,
 	onPress,
 }) => {
-	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+	const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
 	return (
 		<>
 			{type === "contained" && (

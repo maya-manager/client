@@ -8,12 +8,12 @@ import { PostSignupSchema, postSignupSchema } from "../../../store/actions/schem
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { alertActions } from "../../../store/slices/alert.slice";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../../App";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { RootState } from "../../../store";
 import { postSignupAction } from "../../../store/actions/auth.action";
+import { AuthStackParamList } from "../../../navigation/AuthStack";
 
-type SignupScreenProps = NativeStackScreenProps<RootStackParamList, "Signup">;
+type SignupScreenProps = NativeStackScreenProps<AuthStackParamList, "Signup">;
 
 const SignupScreen: FC<SignupScreenProps> = ({ navigation }) => {
 	const dispatch = useAppDispatch();

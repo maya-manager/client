@@ -1,18 +1,22 @@
 import React, { FC, useCallback } from "react";
 import { Provider } from "react-redux";
 import { NavigationContainer, Theme } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Image, SafeAreaView, View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import constants from "./common/constants";
-import HomeScreen from "./screens/auth/welcomeScreen/WelcomeScreen";
-import SignupScreen from "./screens/auth/signupScreen/SignupScreen";
-import LoginScreen from "./screens/auth/loginScreen/LoginScreen";
 import store from "./store";
-import VerifyAccountScreen from "./screens/auth/verifyOtpScreen/VerifyOtpScreen";
 import { AlertError, AlertSuccess } from "./components/alert/Alert";
-import ServerUnderMaintenance from "./screens/error/serverUnderMaintenance/ServerUnderMaintenance";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AuthStackNavigation, { AuthStackParamList } from "./navigation/AuthStack";
+import BottomTabs, { BottomTabsParamList } from "./navigation/BottomTabs";
+
+export type RootStackParamsList = {
+	Auth: AuthStackParamList;
+	BottomTabs: BottomTabsParamList;
+};
+
+const RootStack = createNativeStackNavigator<RootStackParamsList>();
 
 const navigationThemeLight: Theme = {
 	dark: false,
@@ -26,31 +30,6 @@ const navigationThemeLight: Theme = {
 	},
 };
 
-/**
- * Param list for RootStack navigation
- */
-export type RootStackParamList = {
-	Welcome: undefined;
-	Login: undefined;
-	Signup: undefined;
-	VerifyAccount: {
-		email: string;
-	};
-	ServerUnderMaintenance: undefined;
-};
-
-const Stack = createNativeStackNavigator<RootStackParamList>();
-export const initialRouteName: keyof RootStackParamList = "Welcome";
-
-const Logo: FC = () => {
-	return (
-		<Image
-			className="h-10 w-10 mb-2 flex items-center justify-center rounded-full"
-			source={require("../assets/logos/icon.png")}
-		/>
-	);
-};
-
 const Navigation: FC = () => {
 	SplashScreen.preventAutoHideAsync();
 
@@ -59,6 +38,11 @@ const Navigation: FC = () => {
 		motserratBold: require("../assets/fonts/Montserrat/Montserrat-Bold.ttf"),
 		motserratLight: require("../assets/fonts/Montserrat/Montserrat-Light.ttf"),
 		motserratSemiBold: require("../assets/fonts/Montserrat/Montserrat-SemiBold.ttf"),
+		oswaldReg: require("../assets/fonts/Oswald/Oswald-Regular.ttf"),
+		oswaldLight: require("../assets/fonts/Oswald/Oswald-Light.ttf"),
+		oswaldBold: require("../assets/fonts/Oswald/Oswald-Bold.ttf"),
+		oswaldSemiBold: require("../assets/fonts/Oswald/Oswald-SemiBold.ttf"),
+		oswaldMedium: require("../assets/fonts/Oswald/Oswald-Medium.ttf"),
 	});
 
 	const handleOnLayout = useCallback(async () => {
@@ -73,39 +57,17 @@ const Navigation: FC = () => {
 
 	return (
 		<NavigationContainer theme={navigationThemeLight}>
-			<SafeAreaView className="flex-0" />
-
 			<View className="flex-1 font-motserratReg" onLayout={handleOnLayout}>
 				<AlertError />
 				<AlertSuccess />
 
-				<Stack.Navigator
-					initialRouteName={initialRouteName}
-					screenOptions={{
-						headerBackTitleVisible: false,
-					}}
+				<RootStack.Navigator
+					initialRouteName="BottomTabs"
+					screenOptions={{ headerShown: false }}
 				>
-					<Stack.Screen
-						name="Welcome"
-						component={HomeScreen}
-						options={{
-							headerLeft: () => <Logo />,
-							headerTitle: "Maya",
-						}}
-					/>
-					<Stack.Screen name="Signup" component={SignupScreen} />
-					<Stack.Screen name="VerifyAccount" component={VerifyAccountScreen} />
-					<Stack.Screen name="Login" component={LoginScreen} />
-					<Stack.Screen
-						name="ServerUnderMaintenance"
-						component={ServerUnderMaintenance}
-						options={{
-							headerTitle: "We Are Under Maintenance",
-							headerBackVisible: false,
-							gestureEnabled: false,
-						}}
-					/>
-				</Stack.Navigator>
+					<RootStack.Screen name="Auth" component={AuthStackNavigation} />
+					<RootStack.Screen name="BottomTabs" component={BottomTabs} />
+				</RootStack.Navigator>
 			</View>
 		</NavigationContainer>
 	);

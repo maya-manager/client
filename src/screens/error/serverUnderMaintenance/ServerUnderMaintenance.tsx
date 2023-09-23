@@ -1,14 +1,14 @@
 import { NavigationProp } from "@react-navigation/native";
 import { FC } from "react";
 import { Image, Text, View } from "react-native";
-import { RootStackParamList } from "../../../App";
+import { AuthStackParamList } from "../../../App";
 import { Heading, Para } from "../../../components/typography/Typography";
 import Button from "../../../components/button/Button";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { getHealthCheck } from "../../../store/actions/healthCheck.action";
 
 interface ServerUnderMaintenanceProps {
-	navigation: NavigationProp<RootStackParamList>;
+	navigation: NavigationProp<AuthStackParamList>;
 }
 
 const ServerUnderMaintenance: FC<ServerUnderMaintenanceProps> = ({ navigation }) => {
