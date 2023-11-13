@@ -23,7 +23,7 @@
 		"@react-navigation/native": "^6.1.6",
 		"@react-navigation/native-stack": "^6.9.12",
 		"@reduxjs/toolkit": "^1.9.5",
-		"axios": "^1.5.0",
+		"axios": "^1.6.1",
 		"expo": "^49.0.11",
 		"expo-blur": "~12.4.1",
 		"expo-constants": "~14.4.2",
